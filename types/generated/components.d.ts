@@ -1,5 +1,22 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedCooking extends Struct.ComponentSchema {
+  collectionName: 'components_shared_cookings';
+  info: {
+    description: '';
+    displayName: 'Cooking';
+    icon: 'clock';
+  };
+  attributes: {
+    CookingMethod: Schema.Attribute.Enumeration<
+      ['Cook', 'Grill', 'Oven', 'Blanching', 'Microwave', 'Raw']
+    > &
+      Schema.Attribute.Required;
+    Info: Schema.Attribute.Blocks;
+    Value: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -8,6 +25,25 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
   attributes: {
     file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+  };
+}
+
+export interface SharedNutrient extends Struct.ComponentSchema {
+  collectionName: 'components_shared_nutrients';
+  info: {
+    description: '';
+    displayName: 'Nutrient';
+    icon: 'seed';
+  };
+  attributes: {
+    Nutrient: Schema.Attribute.Enumeration<
+      ['Energy', 'Protein', 'Fat', 'Sugar', 'Salt']
+    > &
+      Schema.Attribute.Required;
+    Percentage: Schema.Attribute.Decimal;
+    Unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
+      Schema.Attribute.Required;
+    Value: Schema.Attribute.Decimal & Schema.Attribute.Required;
   };
 }
 
@@ -50,6 +86,22 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedShelflive extends Struct.ComponentSchema {
+  collectionName: 'components_shared_shelflives';
+  info: {
+    description: '';
+    displayName: 'Shelflife';
+    icon: 'archive';
+  };
+  attributes: {
+    Days: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    Info: Schema.Attribute.Blocks;
+    Temperature: Schema.Attribute.Enumeration<
+      ['Room', 'Refrigerator', 'Freezer']
+    >;
+  };
+}
+
 export interface SharedSlider extends Struct.ComponentSchema {
   collectionName: 'components_shared_sliders';
   info: {
@@ -65,10 +117,13 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.cooking': SharedCooking;
       'shared.media': SharedMedia;
+      'shared.nutrient': SharedNutrient;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
+      'shared.shelflive': SharedShelflive;
       'shared.slider': SharedSlider;
     }
   }

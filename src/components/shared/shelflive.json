@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_shelflives",
+  "info": {
+    "displayName": "Shelflife",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Days": {
+      "type": "integer",
+      "default": 1
+    },
+    "Temperature": {
+      "type": "enumeration",
+      "enum": [
+        "Room",
+        "Refrigerator",
+        "Freezer"
+      ]
+    },
+    "Info": {
+      "type": "blocks"
+    }
+  }
+}

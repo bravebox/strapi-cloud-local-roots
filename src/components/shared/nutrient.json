@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_nutrients",
+  "info": {
+    "displayName": "Nutrient",
+    "icon": "seed",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Nutrient": {
+      "type": "enumeration",
+      "enum": [
+        "Energy",
+        "Protein",
+        "Fat",
+        "Sugar",
+        "Salt"
+      ],
+      "required": true
+    },
+    "Value": {
+      "type": "decimal",
+      "required": true
+    },
+    "Unit": {
+      "type": "enumeration",
+      "enum": [
+        "Kcal",
+        "Gram"
+      ],
+      "required": true
+    },
+    "Percentage": {
+      "type": "decimal",
+      "required": false
+    }
+  }
+}

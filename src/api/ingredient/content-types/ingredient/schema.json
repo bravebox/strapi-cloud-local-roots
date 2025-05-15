@@ -1,0 +1,105 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredients",
+  "info": {
+    "singularName": "ingredient",
+    "pluralName": "ingredients",
+    "displayName": "Ingredients",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "SeasonLow": {
+      "type": "customField",
+      "default": "[]",
+      "customField": "plugin::multi-select.multi-select",
+      "options": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "SeasonHigh": {
+      "type": "customField",
+      "default": "[]",
+      "customField": "plugin::multi-select.multi-select",
+      "options": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "Description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "Body": {
+      "type": "blocks"
+    },
+    "Shelflife": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.shelflive"
+    },
+    "Nutrients": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.nutrient"
+    },
+    "Cooking": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cooking"
+    },
+    "CookingAdditional": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cooking"
+    },
+    "DataModel": {
+      "type": "json"
+    },
+    "HeroSlides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.slider"
+    }
+  }
+}

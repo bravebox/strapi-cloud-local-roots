@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_cookings",
+  "info": {
+    "displayName": "Cooking",
+    "icon": "clock",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "CookingMethod": {
+      "type": "enumeration",
+      "enum": [
+        "Cook",
+        "Grill",
+        "Oven",
+        "Blanching",
+        "Microwave",
+        "Raw"
+      ],
+      "required": true
+    },
+    "Value": {
+      "type": "string"
+    },
+    "Info": {
+      "type": "blocks"
+    }
+  }
+}
