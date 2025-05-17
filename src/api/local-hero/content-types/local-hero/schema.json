@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "local_heroes",
+  "info": {
+    "singularName": "local-hero",
+    "pluralName": "local-heroes",
+    "displayName": "Local heroes"
+  },
+  "options": {
+    "comment": ""
+  },
+  "attributes": {
+    "Title": {
+      "type": "text"
+    }
+  }
+}

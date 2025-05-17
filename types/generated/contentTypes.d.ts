@@ -447,28 +447,29 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    Body: Schema.Attribute.Blocks;
-    Cooking: Schema.Attribute.Component<'shared.cooking', true>;
-    CookingAdditional: Schema.Attribute.Component<'shared.cooking', true>;
+    additional: Schema.Attribute.Component<'shared.cooking', true>;
+    body: Schema.Attribute.Blocks;
+    carousel: Schema.Attribute.Component<'shared.slider', true>;
+    cooking: Schema.Attribute.Component<'shared.cooking', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    DataModel: Schema.Attribute.JSON;
-    Description: Schema.Attribute.Text &
+    description: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
         };
       }>;
-    HeroSlides: Schema.Attribute.Component<'shared.slider', true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::ingredient.ingredient'
     >;
-    Nutrients: Schema.Attribute.Component<'shared.nutrient', true>;
+    mick: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    nutrients: Schema.Attribute.Component<'shared.nutrient', true>;
     publishedAt: Schema.Attribute.DateTime;
-    SeasonHigh: Schema.Attribute.JSON &
+    seasonHigh: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
@@ -487,7 +488,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
         ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
-    SeasonLow: Schema.Attribute.JSON &
+    seasonLow: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
         [
@@ -506,13 +507,42 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
         ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
-    Shelflife: Schema.Attribute.Component<'shared.shelflive', true>;
-    Title: Schema.Attribute.String &
+    shelflife: Schema.Attribute.Component<'shared.shelflive', true>;
+    title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
+  collectionName: 'local_heroes';
+  info: {
+    displayName: 'Local heroes';
+    pluralName: 'local-heroes';
+    singularName: 'local-hero';
+  };
+  options: {
+    comment: '';
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::local-hero.local-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1031,6 +1061,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::global.global': ApiGlobalGlobal;
       'api::ingredient.ingredient': ApiIngredientIngredient;
+      'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

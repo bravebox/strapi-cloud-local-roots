@@ -1,6 +1,6 @@
 module.exports = () => ({
-  recipes: {
+  'color-picker': {
     enabled: true,
-    resolve: './src/plugins/recipes'
-  }
+    resolve: './src/plugins/color-picker'
+  },
 });

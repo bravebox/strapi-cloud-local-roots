@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -24,7 +24,7 @@
         }
       }
     },
-    "SeasonLow": {
+    "seasonLow": {
       "type": "customField",
       "default": "[]",
       "customField": "plugin::multi-select.multi-select",
@@ -43,7 +43,7 @@
         "December"
       ]
     },
-    "SeasonHigh": {
+    "seasonHigh": {
       "type": "customField",
       "default": "[]",
       "customField": "plugin::multi-select.multi-select",
@@ -62,7 +62,7 @@
         "December"
       ]
     },
-    "Description": {
+    "description": {
       "type": "text",
       "pluginOptions": {
         "i18n": {
@@ -70,36 +70,37 @@
         }
       }
     },
-    "Body": {
+    "body": {
       "type": "blocks"
     },
-    "Shelflife": {
+    "shelflife": {
       "type": "component",
       "repeatable": true,
       "component": "shared.shelflive"
     },
-    "Nutrients": {
+    "nutrients": {
       "type": "component",
       "repeatable": true,
       "component": "shared.nutrient"
     },
-    "Cooking": {
+    "cooking": {
       "type": "component",
       "repeatable": true,
       "component": "shared.cooking"
     },
-    "CookingAdditional": {
+    "additional": {
       "type": "component",
       "repeatable": true,
       "component": "shared.cooking"
     },
-    "DataModel": {
-      "type": "json"
-    },
-    "HeroSlides": {
+    "carousel": {
       "type": "component",
       "repeatable": true,
       "component": "shared.slider"
+    },
+    "mick": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color"
     }
   }
 }
