@@ -21,7 +21,7 @@ export default {
       icon: PluginIcon,
       components: {
         Input: async () =>
-          import('./components/ColorInput'),
+          import('./components/MultiSelector'),
       },
       options: {
         advanced: [

@@ -1,56 +1,175 @@
 import React from 'react';
-import { useMonthlyStatus } from '../hooks/useMonthlyStatus';
+import styled from 'styled-components';
 import { MONTHS } from '../constants/months';
-import { MonthStatus } from '../types';
-import MonthCard from './MonthCard';
-import JsonOutput from './JsonOutput';
+import { MonthStatus, MonthlyStatusData } from '../types';
 
-const MonthlyStatusSelector: React.FC = () => {
-  const { monthlyStatus, updateMonthStatus, setAllMonthsStatus } = useMonthlyStatus();
+const Container = styled.div`
+  padding: 1.5rem;
+`;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const Button = styled.button<{ variant: 'inactive' | 'low' | 'high' }>`
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+  
+  ${({ variant }) => {
+    switch (variant) {
+      case 'high':
+        return `
+          background-color: #fee2e2;
+          color: #dc2626;
+          &:hover { background-color: #fecaca; }
+        `;
+      case 'low':
+        return `
+          background-color: #e0f2fe;
+          color: #0284c7;
+          &:hover { background-color: #bae6fd; }
+        `;
+      default:
+        return `
+          background-color: #f3f4f6;
+          color: #4b5563;
+          &:hover { background-color: #e5e7eb; }
+        `;
+    }
+  }}
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+`;
+
+const MonthCard = styled.div<{ status: MonthStatus }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  ${({ status }) => {
+    switch (status) {
+      case 'high':
+        return `
+          background-color: #fee2e2;
+          color: #dc2626;
+        `;
+      case 'low':
+        return `
+          background-color: #e0f2fe;
+          color: #0284c7;
+        `;
+      default:
+        return `
+          background-color: #f3f4f6;
+          color: #4b5563;
+        `;
+    }
+  }}
+  
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const MonthName = styled.span`
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
+interface MonthlyStatusSelectorProps {
+  value: MonthlyStatusData;
+  onChange: (value: MonthlyStatusData) => void;
+  disabled?: boolean;
+}
+
+const MonthlyStatusSelector: React.FC<MonthlyStatusSelectorProps> = ({ value, onChange, disabled }) => {
   const handleBulkAction = (status: MonthStatus) => {
-    setAllMonthsStatus(status);
+    if (disabled) return;
+
+    const newStatus = MONTHS.reduce((acc: MonthlyStatusData, month) => {
+      acc[month.id] = status;
+      return acc;
+    }, {} as MonthlyStatusData);
+
+    onChange(newStatus);
+  };
+
+  const handleMonthClick = (monthId: string) => {
+    if (disabled) return;
+
+    const newStatus = { ...value };
+    const currentStatus = value[monthId] || 'inactive';
+    newStatus[monthId] = currentStatus === 'inactive' ? 'low' : currentStatus === 'low' ? 'high' : 'inactive';
+
+    onChange(newStatus);
   };
 
   return (
-    <div className="p-6">
-      <div className="mb-6 flex justify-between items-center">
-        <h2 className="text-xl font-medium text-gray-800">Monthly Status</h2>
-        <div className="flex gap-2">
-          <button
+    <Container>
+      <Header>
+        <ButtonGroup>
+          <Button
+            variant="inactive"
             onClick={() => handleBulkAction('inactive')}
-            className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded transition-colors"
+            disabled={disabled}
           >
             All Inactive
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="low"
             onClick={() => handleBulkAction('low')}
-            className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded transition-colors"
+            disabled={disabled}
           >
             All Low
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="high"
             onClick={() => handleBulkAction('high')}
-            className="px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-700 rounded transition-colors"
+            disabled={disabled}
           >
             All High
-          </button>
-        </div>
-      </div>
+          </Button>
+        </ButtonGroup>
+      </Header>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-2 mb-8">
+      <Grid>
         {MONTHS.map(month => (
           <MonthCard
             key={month.id}
-            month={month}
-            status={monthlyStatus[month.id]}
-            onStatusChange={updateMonthStatus}
-          />
+            status={value[month.id] || 'inactive'}
+            onClick={() => handleMonthClick(month.id)}
+            style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
+          >
+            <MonthName>{month.shortName}</MonthName>
+          </MonthCard>
         ))}
-      </div>
+      </Grid>
 
-      <JsonOutput data={monthlyStatus} />
-    </div>
+    </Container>
   );
 };
 
