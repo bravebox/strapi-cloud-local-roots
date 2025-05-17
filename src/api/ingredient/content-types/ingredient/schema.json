@@ -24,44 +24,6 @@
         }
       }
     },
-    "seasonLow": {
-      "type": "customField",
-      "default": "[]",
-      "customField": "plugin::multi-select.multi-select",
-      "options": [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
-    },
-    "seasonHigh": {
-      "type": "customField",
-      "default": "[]",
-      "customField": "plugin::multi-select.multi-select",
-      "options": [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ]
-    },
     "description": {
       "type": "text",
       "pluginOptions": {
@@ -103,11 +65,11 @@
       "repeatable": true,
       "component": "shared.slider"
     },
-    "mick": {
+    "background": {
       "type": "customField",
       "customField": "plugin::color-picker.color"
     },
-    "Season": {
+    "season": {
       "type": "customField",
       "customField": "plugin::month-multi-selector.month-selector"
     }

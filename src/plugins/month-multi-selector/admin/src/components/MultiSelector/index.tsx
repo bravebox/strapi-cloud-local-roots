@@ -34,15 +34,18 @@ const MultiSelector = React.forwardRef<HTMLInputElement, MultiSelectorProps>((pr
   const { formatMessage } = useIntl();
 
   const handleChange = (newValue: MonthlyStatusData) => {
+    // Ensure we always save a valid object, even if empty
+    const valueToSave = Object.keys(newValue).length > 0 ? newValue : {};
     onChange({
-      target: { name, type: attribute.type, value: JSON.stringify(newValue) },
+      target: { name, type: attribute.type, value: JSON.stringify(valueToSave) },
     });
   };
 
   const parsedValue = React.useMemo(() => {
     if (!value) return {};
     try {
-      return JSON.parse(value) as MonthlyStatusData;
+      const parsed = typeof value === 'string' ? JSON.parse(value) : value;
+      return parsed && typeof parsed === 'object' ? parsed : {};
     } catch (e) {
       console.error('Failed to parse month selector value:', e);
       return {};

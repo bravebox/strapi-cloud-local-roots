@@ -448,6 +448,8 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   };
   attributes: {
     additional: Schema.Attribute.Component<'shared.cooking', true>;
+    background: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -470,50 +472,10 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::ingredient.ingredient'
     >;
-    mick: Schema.Attribute.String &
-      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     nutrients: Schema.Attribute.Component<'shared.nutrient', true>;
     publishedAt: Schema.Attribute.DateTime;
-    Season: Schema.Attribute.JSON &
+    season: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<'plugin::month-multi-selector.month-selector'>;
-    seasonHigh: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ]
-      > &
-      Schema.Attribute.DefaultTo<'[]'>;
-    seasonLow: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<
-        'plugin::multi-select.multi-select',
-        [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December',
-        ]
-      > &
-      Schema.Attribute.DefaultTo<'[]'>;
     shelflife: Schema.Attribute.Component<'shared.shelflive', true>;
     title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
