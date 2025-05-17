@@ -448,7 +448,12 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   };
   attributes: {
     additional: Schema.Attribute.Component<'shared.cooking', true>;
-    body: Schema.Attribute.Blocks;
+    body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     carousel: Schema.Attribute.Component<'shared.slider', true>;
     cooking: Schema.Attribute.Component<'shared.cooking', true>;
     createdAt: Schema.Attribute.DateTime;
@@ -457,7 +462,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: false;
+          localized: true;
         };
       }>;
     locale: Schema.Attribute.String;
@@ -469,6 +474,8 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     nutrients: Schema.Attribute.Component<'shared.nutrient', true>;
     publishedAt: Schema.Attribute.DateTime;
+    Season: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<'plugin::month-multi-selector.month-selector'>;
     seasonHigh: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -511,7 +518,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: false;
+          localized: true;
         };
       }>;
     updatedAt: Schema.Attribute.DateTime;

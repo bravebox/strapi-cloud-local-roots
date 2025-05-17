@@ -22,7 +22,7 @@ export default {
       icon: PluginIcon,
       components: {
         Input: async () =>
-          import('./components/Input'),
+          import('./components/ColorInput'),
       },
       options: {
         advanced: [

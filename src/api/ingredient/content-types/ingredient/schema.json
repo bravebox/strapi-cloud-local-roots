@@ -20,7 +20,7 @@
       "type": "string",
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       }
     },
@@ -66,12 +66,17 @@
       "type": "text",
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       }
     },
     "body": {
-      "type": "blocks"
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "shelflife": {
       "type": "component",
@@ -101,6 +106,10 @@
     "mick": {
       "type": "customField",
       "customField": "plugin::color-picker.color"
+    },
+    "Season": {
+      "type": "customField",
+      "customField": "plugin::month-multi-selector.month-selector"
     }
   }
 }
