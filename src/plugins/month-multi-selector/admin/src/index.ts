@@ -35,11 +35,11 @@ export default {
                 name: 'required',
                 type: 'checkbox',
                 intlLabel: {
-                  id: 'color-picker.settings.requiredField',
+                  id: 'month-selector.settings.requiredField',
                   defaultMessage: 'Required field',
                 },
                 description: {
-                  id: 'color-picker.settings.requiredField.description',
+                  id: 'month-selector.settings.requiredField.description',
                   defaultMessage: "You won't be able to create an entry if this field is empty",
                 },
               },
