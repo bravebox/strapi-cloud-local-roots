@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "Nutrient": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "Energy",
@@ -18,11 +18,11 @@
       ],
       "required": true
     },
-    "Value": {
+    "value": {
       "type": "decimal",
       "required": true
     },
-    "Unit": {
+    "unit": {
       "type": "enumeration",
       "enum": [
         "Kcal",
@@ -30,7 +30,7 @@
       ],
       "required": true
     },
-    "Percentage": {
+    "percentage": {
       "type": "decimal",
       "required": false
     }

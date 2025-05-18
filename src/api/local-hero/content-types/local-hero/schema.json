@@ -4,14 +4,31 @@
   "info": {
     "singularName": "local-hero",
     "pluralName": "local-heroes",
-    "displayName": "Local heroes"
+    "displayName": "Local heroes",
+    "description": ""
   },
   "options": {
-    "comment": ""
+    "draftAndPublish": false
   },
   "attributes": {
     "Title": {
+      "type": "string",
+      "unique": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "body": {
       "type": "text"
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

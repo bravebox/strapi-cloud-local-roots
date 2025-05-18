@@ -8,12 +8,14 @@ export interface SharedCooking extends Struct.ComponentSchema {
     icon: 'clock';
   };
   attributes: {
-    CookingMethod: Schema.Attribute.Enumeration<
-      ['Cook', 'Grill', 'Oven', 'Blanching', 'Microwave', 'Raw']
+    info: Schema.Attribute.Blocks;
+    method: Schema.Attribute.Enumeration<
+      ['Cook', 'Grill', 'Oven', 'Blanching', 'Microwave', 'Raw', 'Other']
     > &
       Schema.Attribute.Required;
-    Info: Schema.Attribute.Blocks;
-    Value: Schema.Attribute.String;
+    other_method: Schema.Attribute.String & Schema.Attribute.Unique;
+    temperature: Schema.Attribute.String;
+    value: Schema.Attribute.String;
   };
 }
 
@@ -36,14 +38,28 @@ export interface SharedNutrient extends Struct.ComponentSchema {
     icon: 'seed';
   };
   attributes: {
-    Nutrient: Schema.Attribute.Enumeration<
+    percentage: Schema.Attribute.Decimal;
+    type: Schema.Attribute.Enumeration<
       ['Energy', 'Protein', 'Fat', 'Sugar', 'Salt']
     > &
       Schema.Attribute.Required;
-    Percentage: Schema.Attribute.Decimal;
-    Unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
+    unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
       Schema.Attribute.Required;
-    Value: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    value: Schema.Attribute.Decimal & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedOnboardingSlide extends Struct.ComponentSchema {
+  collectionName: 'components_shared_onboarding_slides';
+  info: {
+    description: '';
+    displayName: 'OnboardingSlide';
+    icon: 'picture';
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -90,15 +106,13 @@ export interface SharedShelflive extends Struct.ComponentSchema {
   collectionName: 'components_shared_shelflives';
   info: {
     description: '';
-    displayName: 'Shelflife';
+    displayName: 'Storage';
     icon: 'archive';
   };
   attributes: {
-    Days: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
-    Info: Schema.Attribute.Blocks;
-    Temperature: Schema.Attribute.Enumeration<
-      ['Room', 'Refrigerator', 'Freezer']
-    >;
+    days: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    info: Schema.Attribute.Blocks;
+    type: Schema.Attribute.Enumeration<['Room', 'Refrigerator', 'Freezer']>;
   };
 }
 
@@ -120,6 +134,7 @@ declare module '@strapi/strapi' {
       'shared.cooking': SharedCooking;
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
+      'shared.onboarding-slide': SharedOnboardingSlide;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;

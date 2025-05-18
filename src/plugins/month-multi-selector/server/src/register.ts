@@ -6,8 +6,8 @@ const register = ({ strapi }: { strapi: Core.Strapi }) => {
     plugin: 'month-multi-selector',
     type: "json",
     inputSize: {
-      default: 4,
-      isResizable: true,
+      default: 12,
+      isResizable: false,
     },
   });
 };

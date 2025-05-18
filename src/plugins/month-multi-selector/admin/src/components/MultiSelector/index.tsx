@@ -1,16 +1,8 @@
 import * as React from "react";
 import { useIntl } from "react-intl";
-import styled from 'styled-components';
 import MonthlyStatusSelector from "./components/MonthlyStatusSelector";
 import { MonthlyStatusData } from "./types";
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #374151;
-`;
+import { Field, Flex } from '@strapi/design-system';
 
 interface MultiSelectorProps {
   attribute: {
@@ -53,19 +45,25 @@ const MultiSelector = React.forwardRef<HTMLInputElement, MultiSelectorProps>((pr
   }, [value]);
 
   return (
-    <div>
-      <Label>
-        {intlLabel?.id ? formatMessage({
-          id: intlLabel.id,
-          defaultMessage: intlLabel.defaultMessage
-        }) : name}
-      </Label>
-      <MonthlyStatusSelector
-        value={parsedValue}
-        onChange={handleChange}
-        disabled={disabled}
-      />
-    </div>
+    <Field.Root>
+      <Flex direction="column" alignItems="stretch" gap={1}>
+        <Field.Label>
+          {intlLabel?.id ? formatMessage({
+            id: intlLabel.id,
+            defaultMessage: intlLabel.defaultMessage
+          }) : name}
+        </Field.Label>
+
+        <MonthlyStatusSelector
+          value={parsedValue}
+          onChange={handleChange}
+          disabled={disabled}
+        />
+
+        <Field.Hint />
+        <Field.Error />
+      </Flex>
+    </Field.Root>
   );
 });
 

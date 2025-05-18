@@ -40,10 +40,15 @@
         }
       }
     },
-    "shelflife": {
+    "storage": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.shelflive"
+      "component": "shared.shelflive",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "nutrients": {
       "type": "component",
@@ -53,25 +58,44 @@
     "cooking": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.cooking"
+      "component": "shared.cooking",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "additional": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.cooking"
+      "component": "shared.cooking",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "carousel": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.slider"
-    },
-    "background": {
-      "type": "customField",
-      "customField": "plugin::color-picker.color"
     },
     "season": {
       "type": "customField",
       "customField": "plugin::month-multi-selector.month-selector"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

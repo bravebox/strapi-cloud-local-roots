@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "onboardings",
+  "info": {
+    "singularName": "onboarding",
+    "pluralName": "onboardings",
+    "displayName": "Onboarding",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.onboarding-slide",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    }
+  }
+}

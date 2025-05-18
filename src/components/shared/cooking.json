@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "CookingMethod": {
+    "method": {
       "type": "enumeration",
       "enum": [
         "Cook",
@@ -15,15 +15,23 @@
         "Oven",
         "Blanching",
         "Microwave",
-        "Raw"
+        "Raw",
+        "Other"
       ],
       "required": true
     },
-    "Value": {
+    "value": {
       "type": "string"
     },
-    "Info": {
+    "info": {
       "type": "blocks"
+    },
+    "other_method": {
+      "type": "string",
+      "unique": true
+    },
+    "temperature": {
+      "type": "string"
     }
   }
 }

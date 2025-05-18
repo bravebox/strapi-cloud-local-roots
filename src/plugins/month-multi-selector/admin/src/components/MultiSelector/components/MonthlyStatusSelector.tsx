@@ -3,11 +3,23 @@ import styled from 'styled-components';
 import { MONTHS } from '../constants/months';
 import { MonthStatus, MonthlyStatusData } from '../types';
 
-const Container = styled.div`
-  padding: 1.5rem;
-`;
+const colors = {
+  text: {
+    high: '#212112',
+    low: '#212121',
+    inactive: '#919cab',
+  },
+  bg: {
+    high: '#7b79ff',
+    low: '#c4c4ec',
+    inactive: '#212121',
+  },
+  border: {
+    hover: '#ececec',
+  }
+}
 
-const Header = styled.div`
+const Tools = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,29 +41,32 @@ const Button = styled.button<{ variant: 'inactive' | 'low' | 'high' }>`
     switch (variant) {
       case 'high':
         return `
-          background-color: #fee2e2;
-          color: #dc2626;
-          &:hover { background-color: #fecaca; }
+          color: ${colors.text.high};
+          border: solid 1px ${colors.text.high};
+          background-color: ${colors.bg.high};
+          &:hover { border-color:${colors.border.hover}; }
         `;
       case 'low':
         return `
-          background-color: #e0f2fe;
-          color: #0284c7;
-          &:hover { background-color: #bae6fd; }
+          color: ${colors.text.low};
+          border: solid 1px ${colors.text.low};
+          background-color: ${colors.bg.low};
+          &:hover { border-color: ${colors.border.hover} }
         `;
       default:
         return `
-          background-color: #f3f4f6;
-          color: #4b5563;
-          &:hover { background-color: #e5e7eb; }
+          color: ${colors.text.inactive};
+          border: solid 1px ${colors.text.inactive};
+          background-color: ${colors.bg.inactive};
+          &:hover { border-color: ${colors.border.hover} }
         `;
     }
   }}
 `;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+const MonthsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
   gap: 0.5rem;
   margin-bottom: 2rem;
 `;
@@ -60,27 +75,34 @@ const MonthCard = styled.div<{ status: MonthStatus }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  border-radius: 0.5rem;
+  flex: 1;
+  border-radius: 0.25rem;
   cursor: pointer;
+  min-height: 2rem;
   transition: all 0.2s;
   
   ${({ status }) => {
     switch (status) {
       case 'high':
         return `
-          background-color: #fee2e2;
-          color: #dc2626;
+          color: ${colors.text.high};
+          border: solid 1px ${colors.text.high};
+          background-color: ${colors.bg.high};
+          &:hover { border-color:${colors.border.hover}; }
         `;
       case 'low':
         return `
-          background-color: #e0f2fe;
-          color: #0284c7;
+          color: ${colors.text.low};
+          border: solid 1px ${colors.text.low};
+          background-color: ${colors.bg.low};
+          &:hover { border-color:${colors.border.hover}; }
         `;
       default:
         return `
-          background-color: #f3f4f6;
-          color: #4b5563;
+          color: ${colors.text.inactive};
+          border: solid 1px ${colors.text.inactive};
+          background-color: ${colors.bg.inactive};
+          &:hover { border-color:${colors.border.hover}; }
         `;
     }
   }}
@@ -97,7 +119,8 @@ const MonthCard = styled.div<{ status: MonthStatus }>`
 
 const MonthName = styled.span`
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 12px 0;
 `;
 
 interface MonthlyStatusSelectorProps {
@@ -107,6 +130,7 @@ interface MonthlyStatusSelectorProps {
 }
 
 const MonthlyStatusSelector: React.FC<MonthlyStatusSelectorProps> = ({ value, onChange, disabled }) => {
+
   const handleBulkAction = (status: MonthStatus) => {
     if (disabled) return;
 
@@ -129,8 +153,22 @@ const MonthlyStatusSelector: React.FC<MonthlyStatusSelectorProps> = ({ value, on
   };
 
   return (
-    <Container>
-      <Header>
+    <>
+
+      <MonthsContainer>
+        {MONTHS.map(month => (
+          <MonthCard
+            key={month.id}
+            status={value[month.id] || 'inactive'}
+            onClick={() => handleMonthClick(month.id)}
+            style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
+          >
+            <MonthName>{month.shortName}</MonthName>
+          </MonthCard>
+        ))}
+      </MonthsContainer>
+
+      <Tools>
         <ButtonGroup>
           <Button
             variant="inactive"
@@ -154,22 +192,9 @@ const MonthlyStatusSelector: React.FC<MonthlyStatusSelectorProps> = ({ value, on
             All High
           </Button>
         </ButtonGroup>
-      </Header>
+      </Tools>
 
-      <Grid>
-        {MONTHS.map(month => (
-          <MonthCard
-            key={month.id}
-            status={value[month.id] || 'inactive'}
-            onClick={() => handleMonthClick(month.id)}
-            style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
-          >
-            <MonthName>{month.shortName}</MonthName>
-          </MonthCard>
-        ))}
-      </Grid>
-
-    </Container>
+    </>
   );
 };
 

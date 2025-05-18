@@ -381,9 +381,7 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
+    body: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -447,17 +445,26 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    additional: Schema.Attribute.Component<'shared.cooking', true>;
-    background: Schema.Attribute.String &
-      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    additional: Schema.Attribute.Component<'shared.cooking', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    carousel: Schema.Attribute.Component<'shared.slider', true>;
-    cooking: Schema.Attribute.Component<'shared.cooking', true>;
+    carousel: Schema.Attribute.Component<'shared.slider', false>;
+    cooking: Schema.Attribute.Component<'shared.cooking', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -476,7 +483,13 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     season: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<'plugin::month-multi-selector.month-selector'>;
-    shelflife: Schema.Attribute.Component<'shared.shelflive', true>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    storage: Schema.Attribute.Component<'shared.shelflive', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -492,18 +505,21 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
 export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
   collectionName: 'local_heroes';
   info: {
+    description: '';
     displayName: 'Local heroes';
     pluralName: 'local-heroes';
     singularName: 'local-hero';
   };
   options: {
-    comment: '';
     draftAndPublish: false;
   };
   attributes: {
+    body: Schema.Attribute.Text;
+    cover: Schema.Attribute.Media<'images' | 'files'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -511,7 +527,82 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    Title: Schema.Attribute.Text;
+    Title: Schema.Attribute.String & Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOnboardingOnboarding extends Struct.SingleTypeSchema {
+  collectionName: 'onboardings';
+  info: {
+    description: '';
+    displayName: 'Onboarding';
+    pluralName: 'onboardings';
+    singularName: 'onboarding';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::onboarding.onboarding'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    slides: Schema.Attribute.Component<'shared.onboarding-slide', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
+  collectionName: 'recipes';
+  info: {
+    displayName: 'Recipes';
+    pluralName: 'recipes';
+    singularName: 'recipe';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Unique &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1031,6 +1122,8 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
+      'api::onboarding.onboarding': ApiOnboardingOnboarding;
+      'api::recipe.recipe': ApiRecipeRecipe;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

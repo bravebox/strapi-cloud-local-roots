@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useIntl } from "react-intl";
+import { Field, Flex } from '@strapi/design-system';
 
 interface ColorInputProps {
   attribute: {
@@ -29,21 +30,30 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps>((props, r
   };
 
   return (
-    <label>
-      {intlLabel?.id ? formatMessage({
-        id: intlLabel.id,
-        defaultMessage: intlLabel.defaultMessage
-      }) : name}
-      <input
-        ref={ref}
-        type="color"
-        name={name}
-        disabled={disabled}
-        value={value}
-        required={required}
-        onChange={handleChange}
-      />
-    </label>
+    <Field.Root>
+       <Flex direction="column" alignItems="stretch" gap={1}>
+
+        <Field.Label>
+          {intlLabel?.id ? formatMessage({
+            id: intlLabel.id,
+            defaultMessage: intlLabel.defaultMessage
+          }) : name}
+        </Field.Label>
+
+        <input
+          ref={ref}
+          type="color"
+          name={name}
+          disabled={disabled}
+          value={value}
+          required={required}
+          onChange={handleChange}
+        />
+
+        <Field.Hint />
+        <Field.Error />
+      </Flex>
+    </Field.Root>
   );
 });
 
