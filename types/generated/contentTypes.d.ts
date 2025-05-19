@@ -485,8 +485,6 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     >;
     nutrients: Schema.Attribute.Component<'shared.nutrient', true>;
     publishedAt: Schema.Attribute.DateTime;
-    season: Schema.Attribute.JSON &
-      Schema.Attribute.CustomField<'plugin::month-multi-selector.month-selector'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     storage: Schema.Attribute.Component<'shared.shelflive', true> &
       Schema.Attribute.SetPluginOptions<{

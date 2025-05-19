@@ -80,10 +80,6 @@
       "repeatable": false,
       "component": "shared.slider"
     },
-    "season": {
-      "type": "customField",
-      "customField": "plugin::month-multi-selector.month-selector"
-    },
     "slug": {
       "type": "uid",
       "targetField": "title",
