@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "description": "Local Roots Backend",
+  "packageManager": "pnpm@10.10.0",
   "scripts": {
-    "prebuild": "npm ci && npm rebuild",
-    "build": "NODE_ENV=production strapi build",
+    "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
-    "trigger:build": "npm run build && git commit --allow-empty -m 'Trigger rebuild' && git push",
+    "trigger:build": "pnpm build && git commit --allow-empty -m 'Trigger rebuild' && git push",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi"
