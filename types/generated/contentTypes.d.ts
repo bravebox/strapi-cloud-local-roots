@@ -432,6 +432,50 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiInfoBoxInfoBox extends Struct.CollectionTypeSchema {
+  collectionName: 'info_boxes';
+  info: {
+    description: '';
+    displayName: 'InfoBoxes';
+    pluralName: 'info-boxes';
+    singularName: 'info-box';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::info-box.info-box'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   collectionName: 'ingredients';
   info: {
@@ -449,23 +493,17 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    additional: Schema.Attribute.Component<'shared.cooking', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     carousel: Schema.Attribute.Component<'shared.slider', false>;
     cooking: Schema.Attribute.Component<'shared.cooking', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     cover: Schema.Attribute.Media<'images'>;
@@ -489,7 +527,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     storage: Schema.Attribute.Component<'shared.shelflive', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     title: Schema.Attribute.String &
@@ -1122,6 +1160,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
       'api::global.global': ApiGlobalGlobal;
+      'api::info-box.info-box': ApiInfoBoxInfoBox;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::onboarding.onboarding': ApiOnboardingOnboarding;

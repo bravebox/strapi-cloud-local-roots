@@ -8,12 +8,13 @@ export interface SharedCooking extends Struct.ComponentSchema {
     icon: 'clock';
   };
   attributes: {
-    info: Schema.Attribute.Blocks;
+    alternative_method: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
     method: Schema.Attribute.Enumeration<
       ['Cook', 'Grill', 'Oven', 'Blanching', 'Microwave', 'Raw', 'Other']
     > &
       Schema.Attribute.Required;
-    other_method: Schema.Attribute.String & Schema.Attribute.Unique;
     temperature: Schema.Attribute.String;
     value: Schema.Attribute.String;
   };
@@ -111,7 +112,7 @@ export interface SharedShelflive extends Struct.ComponentSchema {
   };
   attributes: {
     days: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
-    info: Schema.Attribute.Blocks;
+    info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
     type: Schema.Attribute.Enumeration<['Room', 'Refrigerator', 'Freezer']>;
   };
 }

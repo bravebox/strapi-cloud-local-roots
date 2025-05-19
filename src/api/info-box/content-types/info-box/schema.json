@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "info_boxes",
+  "info": {
+    "singularName": "info-box",
+    "pluralName": "info-boxes",
+    "displayName": "InfoBoxes",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "body": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

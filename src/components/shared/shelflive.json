@@ -19,8 +19,10 @@
         "Freezer"
       ]
     },
-    "info": {
-      "type": "blocks"
+    "info_box": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::info-box.info-box"
     }
   }
 }

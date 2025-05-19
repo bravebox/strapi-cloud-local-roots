@@ -23,15 +23,17 @@
     "value": {
       "type": "string"
     },
-    "info": {
-      "type": "blocks"
-    },
-    "other_method": {
-      "type": "string",
-      "unique": true
-    },
     "temperature": {
       "type": "string"
+    },
+    "info_box": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::info-box.info-box"
+    },
+    "alternative_method": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
