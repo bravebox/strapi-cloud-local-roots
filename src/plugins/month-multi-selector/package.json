@@ -1,26 +1,71 @@
 {
-  "name": "cobase-2025-hubspot-theme",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "hs:watch": "hs watch cobase-2025 cobase-2025",
-    "hs:preview": "hs theme preview cobase-2025 dist",
-    "hs:upload": "hs upload cobase-2025 cobase-2025",
-    "hs:upload:fields": "hs upload cobase-2025/fields.json cobase-2025/fields.json",
-    "hs:fetch:modules": "hs fetch cobase-2025/modules cobase-2025/modules",
-    "tailwind:build": "postcss src/styles/tailwind.css -o cobase-2025/css/_tailwind.css",
-    "tailwind:watch": "postcss src/styles/tailwind.css -o cobase-2025/css/_tailwind.css --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.0.1",
+  "keywords": ["strapi", "custom-fields"],
+  "type": "commonjs",
+  "exports": {
+    "./package.json": "./package.json",
+    "./strapi-admin": {
+      "types": "./dist/admin/src/index.d.ts",
+      "source": "./admin/src/index.ts",
+      "import": "./dist/admin/index.mjs",
+      "require": "./dist/admin/index.js",
+      "default": "./dist/admin/index.js"
+    },
+    "./strapi-server": {
+      "types": "./dist/server/src/index.d.ts",
+      "source": "./server/src/index.ts",
+      "import": "./dist/server/index.mjs",
+      "require": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
+    }
   },
-  "author": "Mick Schouten - Cobase",
-  "license": "ISC",
-  "description": "",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "strapi-plugin build",
+    "watch": "strapi-plugin watch",
+    "watch:link": "strapi-plugin watch:link",
+    "verify": "strapi-plugin verify",
+    "test:ts:front": "run -T tsc -p admin/tsconfig.json",
+    "test:ts:back": "run -T tsc -p server/tsconfig.json"
+  },
+  "dependencies": {
+    "@strapi/design-system": "^2.0.0-rc.11",
+    "@strapi/icons": "^2.0.0-rc.11",
+    "react-intl": "^6.7.2",
+    "lucide-react": "0.511.0"
+  },
   "devDependencies": {
-    "tailwindcss": "^4.1.4",
-    "postcss": "^8.5.3",
-    "@tailwindcss/postcss": "^4.1.4",
-    "@tailwindcss/vite": "^4.1.4",
-    "postcss-cli": "^11.0.1",
-    "vite": "^6.3.3"
-  }
+    "@strapi/sdk-plugin": "^5.2.6",
+    "@strapi/strapi": "^5.0.4",
+    "@strapi/typescript-utils": "^5.0.4",
+    "@tsconfig/node18": "^18.2.4",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "styled-components": "^6.1.13",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "@strapi/sdk-plugin": "^5.2.6",
+    "@strapi/strapi": "^5.0.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "styled-components": "^6.1.13"
+  },
+  "strapi": {
+    "kind": "plugin",
+    "name": "month-multi-selector",
+    "displayName": "Month Multi Selector",
+    "description": "A simple multi month selector"
+  },
+  "name": "month-multi-selector",
+  "description": "A simple multi month selector",
+  "license": "MIT",
+  "author": "Mick Schouten <bravebox@gmail.com>"
 }
