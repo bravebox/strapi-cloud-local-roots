@@ -82,6 +82,10 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "season": {
+      "type": "customField",
+      "customField": "plugin::month-multi-selector.month-selector"
     }
   }
 }
