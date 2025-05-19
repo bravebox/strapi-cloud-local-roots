@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "description": "Local Roots Backend",
-  "packageManager": "pnpm@10.10.0",
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
-    "trigger:build": "pnpm build && git commit --allow-empty -m 'Trigger rebuild' && git push",
+    "trigger:build": "yarn build && git commit --allow-empty -m 'Trigger rebuild' && git push",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi"
@@ -25,7 +24,6 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.11.24",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
