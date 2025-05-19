@@ -1,6 +1,22 @@
 {
+  "name": "month-multi-selector",
+  "description": "A simple multi month selector",
+  "license": "MIT",
+  "author": "Mick Schouten <bravebox@gmail.com>",
   "version": "0.0.2",
-  "keywords": ["strapi", "custom-fields"],
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "custom-fields"
+  ],
+  "homepage": "https://github.com/bravebox/strapi-plugin-multi-month-selector",
+  "bugs": {
+    "url": "https://github.com/bravebox/strapi-plugin-multi-month-selector/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bravebox/strapi-plugin-multi-month-selector.git"
+  },
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
@@ -34,7 +50,18 @@
     "@strapi/design-system": "^2.0.0-rc.23",
     "@strapi/icons": "^2.0.0-rc.23",
     "react-intl": "^7.1.11",
-    "lucide-react": "0.511.0"
+    "lucide-react": "0.511.0",
+    "@babel/runtime": "^7.11.0",
+    "@codemirror/state": "^6.0.0",
+    "@codemirror/theme-one-dark": "^6.0.0",
+    "@codemirror/view": "^6.0.0",
+    "codemirror": "^6.0.0",
+    "@codemirror/autocomplete": "^6.0.0",
+    "@codemirror/language": "^6.0.0",
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/search": "^6.0.0",
+    "koa": "^2.15.2",
+    "esbuild": "^0.12.0"
   },
   "devDependencies": {
     "@strapi/strapi": "^5.13.0",
@@ -44,10 +71,10 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.0",
     "styled-components": "^6.1.18",
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@strapi/typescript-utils": "^5.13.0",
-    "typescript": "^5.8.3"
+    "typescript": "5.2.2"
   },
   "peerDependencies": {
     "@strapi/strapi": "^5.13.0",
@@ -55,16 +82,23 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.0",
-    "styled-components": "^6.1.18"
+    "styled-components": "^6.1.18",
+    "@babel/runtime": "^7.11.0",
+    "@codemirror/state": "^6.0.0",
+    "@codemirror/theme-one-dark": "^6.0.0",
+    "@codemirror/view": "^6.0.0",
+    "codemirror": "^6.0.0",
+    "@codemirror/autocomplete": "^6.0.0",
+    "@codemirror/language": "^6.0.0",
+    "@codemirror/lint": "^6.0.0",
+    "@codemirror/search": "^6.0.0",
+    "koa": "^2.15.2",
+    "esbuild": "^0.12.0"
   },
   "strapi": {
     "kind": "plugin",
     "name": "month-multi-selector",
     "displayName": "Month Multi Selector",
     "description": "A simple multi month selector"
-  },
-  "name": "month-multi-selector",
-  "description": "A simple multi month selector",
-  "license": "MIT",
-  "author": "Mick Schouten <bravebox@gmail.com>"
+  }  
 }
