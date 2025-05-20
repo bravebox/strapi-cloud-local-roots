@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "info_boxes",
+  "collectionName": "intolerances",
   "info": {
-    "singularName": "info-box",
-    "pluralName": "info-boxes",
-    "displayName": "InfoBoxes",
+    "singularName": "intolerance",
+    "pluralName": "intolerances",
+    "displayName": "Intolerances",
     "description": ""
   },
   "options": {
@@ -16,15 +16,7 @@
     }
   },
   "attributes": {
-    "body": {
-      "type": "blocks",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "title": {
+    "Intolerance": {
       "type": "string",
       "pluginOptions": {
         "i18n": {

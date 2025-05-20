@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_intolerances",
+  "info": {
+    "displayName": "Intolerances",
+    "icon": "emotionUnhappy",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "intolerances": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::intolerance.intolerance"
+    }
+  }
+}

@@ -20,6 +20,21 @@ export interface SharedCooking extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedIntolerances extends Struct.ComponentSchema {
+  collectionName: 'components_shared_intolerances';
+  info: {
+    description: '';
+    displayName: 'Intolerances';
+    icon: 'emotionUnhappy';
+  };
+  attributes: {
+    intolerances: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::intolerance.intolerance'
+    >;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -111,9 +126,10 @@ export interface SharedShelflive extends Struct.ComponentSchema {
     icon: 'archive';
   };
   attributes: {
-    days: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
     type: Schema.Attribute.Enumeration<['Room', 'Refrigerator', 'Freezer']>;
+    unit: Schema.Attribute.Enumeration<['Days', 'Weeks', 'Months', 'Years']>;
+    value: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
   };
 }
 
@@ -133,6 +149,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.cooking': SharedCooking;
+      'shared.intolerances': SharedIntolerances;
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
       'shared.onboarding-slide': SharedOnboardingSlide;

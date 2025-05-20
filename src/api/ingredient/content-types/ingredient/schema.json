@@ -86,6 +86,32 @@
     "season": {
       "type": "customField",
       "customField": "plugin::month-multi-selector.month-selector"
+    },
+    "handeling": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "shopping": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "Intolerances": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.intolerances",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "days": {
+    "value": {
       "type": "integer",
       "default": 1
     },
@@ -23,6 +23,15 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::info-box.info-box"
+    },
+    "unit": {
+      "type": "enumeration",
+      "enum": [
+        "Days",
+        "Weeks",
+        "Months",
+        "Years"
+      ]
     }
   }
 }

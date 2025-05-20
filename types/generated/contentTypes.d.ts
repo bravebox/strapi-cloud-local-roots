@@ -441,7 +441,7 @@ export interface ApiInfoBoxInfoBox extends Struct.CollectionTypeSchema {
     singularName: 'info-box';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   pluginOptions: {
     i18n: {
@@ -516,6 +516,18 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    handeling: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Intolerances: Schema.Attribute.Component<'shared.intolerances', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -525,6 +537,12 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     season: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<'plugin::month-multi-selector.month-selector'>;
+    shopping: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     storage: Schema.Attribute.Component<'shared.shelflive', true> &
       Schema.Attribute.SetPluginOptions<{
@@ -538,6 +556,44 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiIntoleranceIntolerance extends Struct.CollectionTypeSchema {
+  collectionName: 'intolerances';
+  info: {
+    description: '';
+    displayName: 'Intolerances';
+    pluralName: 'intolerances';
+    singularName: 'intolerance';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Intolerance: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::intolerance.intolerance'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1164,6 +1220,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::info-box.info-box': ApiInfoBoxInfoBox;
       'api::ingredient.ingredient': ApiIngredientIngredient;
+      'api::intolerance.intolerance': ApiIntoleranceIntolerance;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::onboarding.onboarding': ApiOnboardingOnboarding;
       'api::recipe.recipe': ApiRecipeRecipe;
