@@ -7,7 +7,7 @@
   },
   "options": {},
   "attributes": {
-    "intolerances": {
+    "list": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::intolerance.intolerance"

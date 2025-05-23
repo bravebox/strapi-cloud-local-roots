@@ -432,6 +432,46 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHealthReasonHealthReason
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'health_reasons';
+  info: {
+    description: '';
+    displayName: 'HealthReasons';
+    pluralName: 'health-reasons';
+    singularName: 'health-reason';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    is_negative: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::health-reason.health-reason'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiInfoBoxInfoBox extends Struct.CollectionTypeSchema {
   collectionName: 'info_boxes';
   info: {
@@ -522,7 +562,8 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    Intolerances: Schema.Attribute.Component<'shared.intolerances', true> &
+    health: Schema.Attribute.Component<'shared.health', false>;
+    intolerances: Schema.Attribute.Component<'shared.intolerances', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -544,7 +585,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
         };
       }>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    storage: Schema.Attribute.Component<'shared.shelflive', true> &
+    storage: Schema.Attribute.Component<'shared.storage', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -582,18 +623,18 @@ export interface ApiIntoleranceIntolerance extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Intolerance: Schema.Attribute.String &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::intolerance.intolerance'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1218,6 +1259,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
       'api::global.global': ApiGlobalGlobal;
+      'api::health-reason.health-reason': ApiHealthReasonHealthReason;
       'api::info-box.info-box': ApiInfoBoxInfoBox;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::intolerance.intolerance': ApiIntoleranceIntolerance;

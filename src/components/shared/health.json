@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_health",
+  "info": {
+    "displayName": "Health",
+    "icon": "heart",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "list": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::health-reason.health-reason"
+    }
+  }
+}

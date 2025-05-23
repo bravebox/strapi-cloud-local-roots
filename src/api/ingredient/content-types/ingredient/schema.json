@@ -43,7 +43,7 @@
     "storage": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.shelflive",
+      "component": "shared.storage",
       "pluginOptions": {
         "i18n": {
           "localized": false
@@ -103,15 +103,20 @@
         }
       }
     },
-    "Intolerances": {
+    "intolerances": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.intolerances",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       }
+    },
+    "health": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.health"
     }
   }
 }

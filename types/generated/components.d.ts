@@ -20,6 +20,21 @@ export interface SharedCooking extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHealth extends Struct.ComponentSchema {
+  collectionName: 'components_shared_health';
+  info: {
+    description: '';
+    displayName: 'Health';
+    icon: 'heart';
+  };
+  attributes: {
+    list: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::health-reason.health-reason'
+    >;
+  };
+}
+
 export interface SharedIntolerances extends Struct.ComponentSchema {
   collectionName: 'components_shared_intolerances';
   info: {
@@ -28,7 +43,7 @@ export interface SharedIntolerances extends Struct.ComponentSchema {
     icon: 'emotionUnhappy';
   };
   attributes: {
-    intolerances: Schema.Attribute.Relation<
+    list: Schema.Attribute.Relation<
       'oneToMany',
       'api::intolerance.intolerance'
     >;
@@ -118,8 +133,20 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedShelflive extends Struct.ComponentSchema {
-  collectionName: 'components_shared_shelflives';
+export interface SharedSlider extends Struct.ComponentSchema {
+  collectionName: 'components_shared_sliders';
+  info: {
+    description: '';
+    displayName: 'Slider';
+    icon: 'address-book';
+  };
+  attributes: {
+    files: Schema.Attribute.Media<'images', true>;
+  };
+}
+
+export interface SharedStorage extends Struct.ComponentSchema {
+  collectionName: 'components_shared_storages';
   info: {
     description: '';
     displayName: 'Storage';
@@ -133,22 +160,11 @@ export interface SharedShelflive extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedSlider extends Struct.ComponentSchema {
-  collectionName: 'components_shared_sliders';
-  info: {
-    description: '';
-    displayName: 'Slider';
-    icon: 'address-book';
-  };
-  attributes: {
-    files: Schema.Attribute.Media<'images', true>;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.cooking': SharedCooking;
+      'shared.health': SharedHealth;
       'shared.intolerances': SharedIntolerances;
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
@@ -156,8 +172,8 @@ declare module '@strapi/strapi' {
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
-      'shared.shelflive': SharedShelflive;
       'shared.slider': SharedSlider;
+      'shared.storage': SharedStorage;
     }
   }
 }

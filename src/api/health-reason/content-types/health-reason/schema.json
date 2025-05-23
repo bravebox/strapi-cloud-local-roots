@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "intolerances",
+  "collectionName": "health_reasons",
   "info": {
-    "singularName": "intolerance",
-    "pluralName": "intolerances",
-    "displayName": "Intolerances",
+    "singularName": "health-reason",
+    "pluralName": "health-reasons",
+    "displayName": "HealthReasons",
     "description": ""
   },
   "options": {
@@ -16,6 +16,10 @@
     }
   },
   "attributes": {
+    "is_negative": {
+      "type": "boolean",
+      "default": false
+    },
     "title": {
       "type": "string",
       "pluginOptions": {
