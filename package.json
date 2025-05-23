@@ -16,6 +16,7 @@
     "@strapi/plugin-cloud": "5.13.0",
     "@strapi/plugin-graphql": "^5.13.0",
     "@strapi/plugin-users-permissions": "5.13.0",
+    "@strapi/provider-email-nodemailer": "^5.13.1",
     "@strapi/strapi": "5.13.0",
     "better-sqlite3": "11.3.0",
     "month-multi-selector": "^0.0.5",
