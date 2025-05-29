@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "locations",
+  "info": {
+    "singularName": "location",
+    "pluralName": "locations",
+    "displayName": "Locations",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "city",
+        "region",
+        "province",
+        "restaurant",
+        "café",
+        "bistro",
+        "bar",
+        "food truck",
+        "street food stall",
+        "bakery",
+        "patisserie",
+        "deli",
+        "butcher shop",
+        "fish market",
+        "farmers’ market",
+        "supermarket",
+        "grocery store",
+        "winery",
+        "brewery",
+        "distillery",
+        "vineyard",
+        "farm",
+        "orchard",
+        "food court",
+        "canteen",
+        "dining hall",
+        "pop-up restaurant",
+        "culinary school",
+        "cooking studio",
+        "test kitchen",
+        "private dining room",
+        "banquet hall",
+        "event venue",
+        "food festival location",
+        "catering facility",
+        "hotel restaurant",
+        "rooftop bar/restaurant",
+        "beach bar",
+        "tea house",
+        "ice cream parlor",
+        "chocolate shop",
+        "food warehouse",
+        "food distribution center"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "body": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "location": {
+      "type": "customField",
+      "options": {
+        "info": true
+      },
+      "customField": "plugin::strapi-location-picker.location-picker"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.address"
+    },
+    "partners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::partner.partner",
+      "mappedBy": "locations"
+    }
+  }
+}

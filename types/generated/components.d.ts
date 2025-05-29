@@ -1,5 +1,22 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedAddress extends Struct.ComponentSchema {
+  collectionName: 'components_shared_addresses';
+  info: {
+    description: '';
+    displayName: 'address';
+    icon: 'pinMap';
+  };
+  attributes: {
+    address_0: Schema.Attribute.String;
+    address_1: Schema.Attribute.String;
+    city: Schema.Attribute.String;
+    country: Schema.Attribute.Enumeration<['Germany']> &
+      Schema.Attribute.DefaultTo<'Germany'>;
+    postal_code: Schema.Attribute.String;
+  };
+}
+
 export interface SharedCooking extends Struct.ComponentSchema {
   collectionName: 'components_shared_cookings';
   info: {
@@ -163,6 +180,7 @@ export interface SharedStorage extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.address': SharedAddress;
       'shared.cooking': SharedCooking;
       'shared.health': SharedHealth;
       'shared.intolerances': SharedIntolerances;

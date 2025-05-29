@@ -665,8 +665,120 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
       'api::local-hero.local-hero'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
-    Title: Schema.Attribute.String & Schema.Attribute.Unique;
+    reserve_href: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website_url: Schema.Attribute.String;
+  };
+}
+
+export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
+  collectionName: 'locations';
+  info: {
+    description: '';
+    displayName: 'Locations';
+    pluralName: 'locations';
+    singularName: 'location';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    address: Schema.Attribute.Component<'shared.address', false>;
+    body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::location.location'
+    >;
+    location: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::strapi-location-picker.location-picker',
+        {
+          info: true;
+        }
+      >;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      [
+        'city',
+        'region',
+        'province',
+        'restaurant',
+        'caf\u00E9',
+        'bistro',
+        'bar',
+        'food truck',
+        'street food stall',
+        'bakery',
+        'patisserie',
+        'deli',
+        'butcher shop',
+        'fish market',
+        'farmers\u2019 market',
+        'supermarket',
+        'grocery store',
+        'winery',
+        'brewery',
+        'distillery',
+        'vineyard',
+        'farm',
+        'orchard',
+        'food court',
+        'canteen',
+        'dining hall',
+        'pop-up restaurant',
+        'culinary school',
+        'cooking studio',
+        'test kitchen',
+        'private dining room',
+        'banquet hall',
+        'event venue',
+        'food festival location',
+        'catering facility',
+        'hotel restaurant',
+        'rooftop bar/restaurant',
+        'beach bar',
+        'tea house',
+        'ice cream parlor',
+        'chocolate shop',
+        'food warehouse',
+        'food distribution center',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -709,6 +821,81 @@ export interface ApiOnboardingOnboarding extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
+  collectionName: 'partners';
+  info: {
+    description: '';
+    displayName: 'Partners';
+    pluralName: 'partners';
+    singularName: 'partner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.Component<'shared.address', false>;
+    body: Schema.Attribute.Blocks;
+    contact_name: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    local_heroes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::local-hero.local-hero'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::partner.partner'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::strapi-location-picker.location-picker',
+        {
+          info: true;
+        }
+      >;
+    locations: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::location.location'
+    >;
+    membership_ended: Schema.Attribute.Date & Schema.Attribute.Private;
+    membership_started: Schema.Attribute.Date &
+      Schema.Attribute.Required &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    reserve_href: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      [
+        'person',
+        'group',
+        'institution',
+        'company',
+        'organization',
+        'association',
+        'foundation',
+        'educational institution',
+        'government agency',
+        'healthcare institution',
+        'event',
+        'network',
+        'initiative',
+        'volunteer group',
+        'religious organization',
+        'international organization',
+        'media',
+      ]
+    > &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website_href: Schema.Attribute.String;
   };
 }
 
@@ -1264,7 +1451,9 @@ declare module '@strapi/strapi' {
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::intolerance.intolerance': ApiIntoleranceIntolerance;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
+      'api::location.location': ApiLocationLocation;
       'api::onboarding.onboarding': ApiOnboardingOnboarding;
+      'api::partner.partner': ApiPartnerPartner;
       'api::recipe.recipe': ApiRecipeRecipe;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

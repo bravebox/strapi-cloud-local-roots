@@ -11,9 +11,10 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "Title": {
+    "name": {
       "type": "string",
-      "unique": true
+      "unique": true,
+      "required": true
     },
     "cover": {
       "type": "media",
@@ -29,6 +30,20 @@
     },
     "description": {
       "type": "string"
+    },
+    "partners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::partner.partner",
+      "mappedBy": "local_heroes"
+    },
+    "website_url": {
+      "type": "string",
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+    },
+    "reserve_href": {
+      "type": "string",
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
     }
   }
 }

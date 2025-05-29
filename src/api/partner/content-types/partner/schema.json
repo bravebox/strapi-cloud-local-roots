@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partners",
+  "info": {
+    "singularName": "partner",
+    "pluralName": "partners",
+    "displayName": "Partners",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "local_heroes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::local-hero.local-hero",
+      "inversedBy": "partners"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location",
+      "inversedBy": "partners"
+    },
+    "body": {
+      "type": "blocks"
+    },
+    "website_href": {
+      "type": "string",
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+    },
+    "contact_name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "person",
+        "group",
+        "institution",
+        "company",
+        "organization",
+        "association",
+        "foundation",
+        "educational institution",
+        "government agency",
+        "healthcare institution",
+        "event",
+        "network",
+        "initiative",
+        "volunteer group",
+        "religious organization",
+        "international organization",
+        "media"
+      ],
+      "required": true
+    },
+    "membership_started": {
+      "type": "date",
+      "required": true,
+      "private": true
+    },
+    "membership_ended": {
+      "type": "date",
+      "private": true
+    },
+    "reserve_href": {
+      "type": "string",
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+    },
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.address"
+    },
+    "location": {
+      "type": "customField",
+      "options": {
+        "info": true
+      },
+      "customField": "plugin::strapi-location-picker.location-picker"
+    }
+  }
+}
