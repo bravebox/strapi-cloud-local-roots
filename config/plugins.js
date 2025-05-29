@@ -25,4 +25,8 @@ module.exports = () => ({
     },
   },
 
+  'address-selection': {
+    enabled: true
+  },
+
 });
