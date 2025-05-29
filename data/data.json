@@ -27,215 +27,413 @@
       }
     ]
   },
-  "categories": [
+  "ingredients": [
     {
-      "name": "news",
-      "slug": "news"
+      "title": "Carrot",
+      "description": "Sweet and crunchy root vegetable",
+      "slug": "carrot",
+      "handeling": "Store in a cool, dark place",
+      "shopping": "Choose firm carrots with bright orange color",
+      "season": {
+        "january": "high",
+        "february": "high",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
     },
     {
-      "name": "tech",
-      "slug": "tech"
+      "title": "Spinach",
+      "description": "Nutrient-rich leafy green",
+      "slug": "spinach",
+      "handeling": "Store in the refrigerator in a plastic bag",
+      "shopping": "Look for crisp, dark green leaves",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "inactive",
+        "august": "inactive",
+        "september": "high",
+        "october": "high",
+        "november": "inactive",
+        "december": "inactive"
+      }
     },
     {
-      "name": "food",
-      "slug": "food"
+      "title": "Tomato",
+      "description": "Versatile fruit used as a vegetable",
+      "slug": "tomato",
+      "handeling": "Store at room temperature away from direct sunlight",
+      "shopping": "Choose firm tomatoes with rich color",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "low",
+        "november": "inactive",
+        "december": "inactive"
+      }
     },
     {
-      "name": "nature",
-      "slug": "nature"
+      "title": "Potato",
+      "description": "Starchy root vegetable",
+      "slug": "potato",
+      "handeling": "Store in a cool, dark place",
+      "shopping": "Select firm potatoes without sprouts",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "inactive",
+        "june": "low",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "inactive"
+      }
     },
     {
-      "name": "story",
-      "slug": "story"
-    }
-  ],
-  "authors": [
-    {
-      "name": "David Doe",
-      "email": "daviddoe@strapi.io",
-      "avatar": "daviddoe@strapi.io.jpg"
+      "title": "Broccoli",
+      "description": "Nutritious green cruciferous vegetable",
+      "slug": "broccoli",
+      "handeling": "Refrigerate in a plastic bag",
+      "shopping": "Look for tight, dark green florets",
+      "season": {
+        "january": "high",
+        "february": "high",
+        "march": "high",
+        "april": "high",
+        "may": "low",
+        "june": "inactive",
+        "july": "inactive",
+        "august": "inactive",
+        "september": "low",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
     },
     {
-      "name": "Sarah Baker",
-      "email": "sarahbaker@strapi.io",
-      "avatar": "sarahbaker@strapi.io.jpg"
-    }
-  ],
-  "articles": [
-    {
-      "title": "The internet's Own boy",
-      "slug": "the-internet-s-own-boy",
-      "category": {
-        "id": 5
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Follow the story of Aaron Swartz, the boy who could change the world",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
+      "title": "Bell Pepper",
+      "description": "Sweet and colorful pepper variety",
+      "slug": "bell-pepper",
+      "handeling": "Store in the refrigerator",
+      "shopping": "Choose firm, brightly colored peppers",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "low",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "low",
+        "november": "inactive",
+        "december": "inactive"
+      }
     },
     {
-      "title": "This shrimp is awesome",
-      "slug": "this-shrimp-is-awesome",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
+      "title": "Cucumber",
+      "description": "Cool and refreshing vegetable",
+      "slug": "cucumber",
+      "handeling": "Keep in the refrigerator",
+      "shopping": "Select firm cucumbers with dark green skin",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "low",
+        "november": "inactive",
+        "december": "inactive"
+      }
     },
     {
-      "title": "A bug is becoming a meme on the internet",
-      "slug": "a-bug-is-becoming-a-meme-on-the-internet",
-      "category": {
-        "id": 2
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "How a bug on MySQL is becoming a meme on the internet",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
+      "title": "Onion",
+      "description": "Essential aromatic vegetable",
+      "slug": "onion",
+      "handeling": "Store in a cool, dry, dark place",
+      "shopping": "Choose firm onions without soft spots",
+      "season": {
+        "january": "high",
+        "february": "high",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
     },
     {
-      "title": "Beautiful picture",
-      "slug": "beautiful-picture",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Description of a beautiful picture",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
+      "title": "Garlic",
+      "description": "Flavorful and aromatic bulb",
+      "slug": "garlic",
+      "handeling": "Store in a cool, dry place",
+      "shopping": "Select firm, heavy heads of garlic",
+      "season": ["july", "august", "september", "october", "november", "december"]
     },
     {
-      "title": "What's inside a Black Hole",
-      "slug": "what-s-inside-a-black-hole",
-      "category": {
-        "id": 1
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Maybe the answer is in this article, or not...",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
+      "title": "Lettuce",
+      "description": "Crisp salad green",
+      "slug": "lettuce",
+      "handeling": "Wash and store in the refrigerator",
+      "shopping": "Look for fresh, crisp leaves",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "inactive",
+        "august": "inactive",
+        "september": "high",
+        "october": "high",
+        "november": "inactive",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Mushroom",
+      "description": "Earthy and meaty fungus",
+      "slug": "mushroom",
+      "handeling": "Store in paper bag in refrigerator",
+      "shopping": "Choose firm, unblemished mushrooms",
+      "season": {
+        "january": "high",
+        "february": "high",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
+    },
+    {
+      "title": "Zucchini",
+      "description": "Versatile summer squash",
+      "slug": "zucchini",
+      "handeling": "Refrigerate in a plastic bag",
+      "shopping": "Select small to medium-sized zucchini",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "low",
+        "november": "inactive",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Sweet Potato",
+      "description": "Nutritious root vegetable",
+      "slug": "sweet-potato",
+      "handeling": "Store in a cool, dark place",
+      "shopping": "Choose firm sweet potatoes without soft spots",
+      "season": {
+        "january": "high",
+        "february": "low",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "inactive",
+        "june": "inactive",
+        "july": "inactive",
+        "august": "low",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
+    },
+    {
+      "title": "Cauliflower",
+      "description": "Versatile cruciferous vegetable",
+      "slug": "cauliflower",
+      "handeling": "Store in the refrigerator",
+      "shopping": "Look for white, compact heads",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "inactive",
+        "june": "inactive",
+        "july": "inactive",
+        "august": "low",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "high"
+      }
+    },
+    {
+      "title": "Green Beans",
+      "description": "Fresh and snappy beans",
+      "slug": "green-beans",
+      "handeling": "Store in a plastic bag in the refrigerator",
+      "shopping": "Choose crisp, bright green beans",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "low",
+        "november": "inactive",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Asparagus",
+      "description": "Tender spring vegetable",
+      "slug": "asparagus",
+      "handeling": "Store upright in water in refrigerator",
+      "shopping": "Look for firm, straight stalks",
+      "season": {
+        "january": "inactive",
+        "february": "low",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "low",
+        "august": "inactive",
+        "september": "inactive",
+        "october": "inactive",
+        "november": "inactive",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Eggplant",
+      "description": "Purple-skinned nightshade vegetable",
+      "slug": "eggplant",
+      "handeling": "Store in the refrigerator",
+      "shopping": "Choose firm, glossy eggplants",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "low",
+        "june": "low",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "low",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Celery",
+      "description": "Crunchy stalked vegetable",
+      "slug": "celery",
+      "handeling": "Wrap in foil and refrigerate",
+      "shopping": "Select crisp, light green stalks",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "inactive",
+        "april": "inactive",
+        "may": "inactive",
+        "june": "low",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Radish",
+      "description": "Spicy root vegetable",
+      "slug": "radish",
+      "handeling": "Remove tops and refrigerate",
+      "shopping": "Choose firm, bright colored radishes",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "high",
+        "april": "high",
+        "may": "high",
+        "june": "high",
+        "july": "inactive",
+        "august": "inactive",
+        "september": "high",
+        "october": "high",
+        "november": "inactive",
+        "december": "inactive"
+      }
+    },
+    {
+      "title": "Kale",
+      "description": "Nutrient-dense leafy green",
+      "slug": "kale",
+      "handeling": "Store in a plastic bag in the refrigerator",
+      "shopping": "Select dark, crisp leaves",
+      "season": {
+        "january": "inactive",
+        "february": "inactive",
+        "march": "low",
+        "april": "low",
+        "may": "low",
+        "june": "high",
+        "july": "high",
+        "august": "high",
+        "september": "high",
+        "october": "high",
+        "november": "high",
+        "december": "inactive"
+      }
     }
   ]
 }
