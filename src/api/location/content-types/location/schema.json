@@ -28,9 +28,7 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "city",
-        "region",
-        "province",
+        "other",
         "restaurant",
         "café",
         "bistro",
@@ -104,6 +102,11 @@
       "relation": "manyToMany",
       "target": "api::partner.partner",
       "mappedBy": "locations"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::region.region"
     }
   }
 }

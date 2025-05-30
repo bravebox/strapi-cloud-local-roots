@@ -653,7 +653,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    body: Schema.Attribute.Text;
+    body: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images' | 'files'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -665,6 +665,13 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
       'api::local-hero.local-hero'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::strapi-location-picker.location-picker',
+        {
+          info: true;
+        }
+      >;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -726,11 +733,10 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       }>;
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.Relation<'oneToOne', 'api::region.region'>;
     type: Schema.Attribute.Enumeration<
       [
-        'city',
-        'region',
-        'province',
+        'other',
         'restaurant',
         'caf\u00E9',
         'bistro',
@@ -835,10 +841,30 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    address: Schema.Attribute.Component<'shared.address', false>;
-    body: Schema.Attribute.Blocks;
-    contact_name: Schema.Attribute.String;
+    address: Schema.Attribute.Component<'shared.address', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contact_name: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -846,12 +872,11 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::local-hero.local-hero'
     >;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::partner.partner'
-    > &
-      Schema.Attribute.Private;
+    >;
     location: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::strapi-location-picker.location-picker',
@@ -863,13 +888,35 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::location.location'
     >;
-    membership_ended: Schema.Attribute.Date & Schema.Attribute.Private;
+    membership_ended: Schema.Attribute.Date &
+      Schema.Attribute.Private &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     membership_started: Schema.Attribute.Date &
       Schema.Attribute.Required &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+      Schema.Attribute.Private &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
-    reserve_href: Schema.Attribute.String;
+    reserve_href: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     type: Schema.Attribute.Enumeration<
       [
         'person',
@@ -891,11 +938,21 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
         'media',
       ]
     > &
-      Schema.Attribute.Required;
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    website_href: Schema.Attribute.String;
+    website_href: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
   };
 }
 
@@ -929,6 +986,42 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
+  collectionName: 'regions';
+  info: {
+    description: '';
+    displayName: 'Regions';
+    pluralName: 'regions';
+    singularName: 'region';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::region.region'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::strapi-location-picker.location-picker',
+        {
+          info: true;
+        }
+      >;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1455,6 +1548,7 @@ declare module '@strapi/strapi' {
       'api::onboarding.onboarding': ApiOnboardingOnboarding;
       'api::partner.partner': ApiPartnerPartner;
       'api::recipe.recipe': ApiRecipeRecipe;
+      'api::region.region': ApiRegionRegion;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

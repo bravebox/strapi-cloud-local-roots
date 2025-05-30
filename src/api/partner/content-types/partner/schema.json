@@ -10,10 +10,20 @@
   "options": {
     "draftAndPublish": true
   },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "local_heroes": {
       "type": "relation",
@@ -28,14 +38,29 @@
       "inversedBy": "partners"
     },
     "body": {
-      "type": "blocks"
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "website_href": {
       "type": "string",
-      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "contact_name": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "type": {
       "type": "enumeration",
@@ -58,25 +83,50 @@
         "international organization",
         "media"
       ],
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "membership_started": {
       "type": "date",
       "required": true,
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "membership_ended": {
       "type": "date",
-      "private": true
+      "private": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "reserve_href": {
       "type": "string",
-      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "address": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.address"
+      "component": "shared.address",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "location": {
       "type": "customField",

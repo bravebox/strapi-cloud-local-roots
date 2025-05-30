@@ -25,9 +25,6 @@
         "files"
       ]
     },
-    "body": {
-      "type": "text"
-    },
     "description": {
       "type": "string"
     },
@@ -44,6 +41,16 @@
     "reserve_href": {
       "type": "string",
       "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
+    },
+    "body": {
+      "type": "blocks"
+    },
+    "location": {
+      "type": "customField",
+      "options": {
+        "info": true
+      },
+      "customField": "plugin::strapi-location-picker.location-picker"
     }
   }
 }
