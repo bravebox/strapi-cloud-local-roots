@@ -97,20 +97,6 @@ export interface SharedNutrient extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedOnboardingSlide extends Struct.ComponentSchema {
-  collectionName: 'components_shared_onboarding_slides';
-  info: {
-    description: '';
-    displayName: 'OnboardingSlide';
-    icon: 'picture';
-  };
-  attributes: {
-    body: Schema.Attribute.Blocks;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-  };
-}
-
 export interface SharedQuote extends Struct.ComponentSchema {
   collectionName: 'components_shared_quotes';
   info: {
@@ -186,7 +172,6 @@ declare module '@strapi/strapi' {
       'shared.intolerances': SharedIntolerances;
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
-      'shared.onboarding-slide': SharedOnboardingSlide;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
