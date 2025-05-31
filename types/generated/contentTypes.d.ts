@@ -536,7 +536,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: false;
+          localized: true;
         };
       }>;
     carousel: Schema.Attribute.Component<'shared.slider', false>;
