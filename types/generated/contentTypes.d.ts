@@ -676,6 +676,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
+    plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     reserve_href: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -779,45 +780,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
         'food distribution center',
       ]
     > &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiOnboardingOnboarding extends Struct.SingleTypeSchema {
-  collectionName: 'onboardings';
-  info: {
-    description: '';
-    displayName: 'Onboarding';
-    pluralName: 'onboardings';
-    singularName: 'onboarding';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::onboarding.onboarding'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    slides: Schema.Attribute.Component<'shared.onboarding-slide', true> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1022,9 +984,25 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
       >;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      [
+        'Other',
+        'Province',
+        'District',
+        'County',
+        'Municipality',
+        'City',
+        'Town',
+        'Village',
+        'Neighborhood',
+        'Nature Reserve (or Protected Area)',
+        'National Park',
+      ]
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    website_url: Schema.Attribute.String;
   };
 }
 
@@ -1545,7 +1523,6 @@ declare module '@strapi/strapi' {
       'api::intolerance.intolerance': ApiIntoleranceIntolerance;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::location.location': ApiLocationLocation;
-      'api::onboarding.onboarding': ApiOnboardingOnboarding;
       'api::partner.partner': ApiPartnerPartner;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::region.region': ApiRegionRegion;

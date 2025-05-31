@@ -51,6 +51,10 @@
         "info": true
       },
       "customField": "plugin::strapi-location-picker.location-picker"
+    },
+    "plus": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

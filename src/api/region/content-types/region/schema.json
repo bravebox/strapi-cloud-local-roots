@@ -20,6 +20,25 @@
         "info": true
       },
       "customField": "plugin::strapi-location-picker.location-picker"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Other",
+        "Province",
+        "District",
+        "County",
+        "Municipality",
+        "City",
+        "Town",
+        "Village",
+        "Neighborhood",
+        "Nature Reserve (or Protected Area)",
+        "National Park"
+      ]
+    },
+    "website_url": {
+      "type": "string"
     }
   }
 }
