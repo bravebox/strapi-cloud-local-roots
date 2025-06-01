@@ -584,7 +584,6 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     storage: Schema.Attribute.Component<'shared.storage', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

@@ -70,11 +70,6 @@
       "repeatable": false,
       "component": "shared.slider"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "required": true
-    },
     "cover": {
       "type": "media",
       "multiple": false,
