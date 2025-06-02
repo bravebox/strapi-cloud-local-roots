@@ -1,10 +1,12 @@
 const { env } = require('@strapi/utils');
 
 module.exports = () => ({
-  // 'month-multi-selector': {
-  //   enabled: true,
-  //   resolve: './src/plugins/month-multi-selector'
-  // },
+
+  graphql: {
+    config: {
+      playgroundAlways: true,
+    },
+  },
 
   email: {
     config: {
