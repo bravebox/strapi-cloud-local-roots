@@ -65,24 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "favorite_ingredients": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::ingredient.ingredient",
-      "inversedBy": "users"
-    },
-    "favorite_recipes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::recipe.recipe",
-      "inversedBy": "users"
-    },
-    "favorite_local_heroes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::local-hero.local-hero",
-      "inversedBy": "users"
-    },
     "user_meta": {
       "type": "json"
     }

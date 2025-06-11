@@ -48,12 +48,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::ingredient.ingredient"
-    },
-    "users": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "plugin::users-permissions.user",
-      "mappedBy": "favorite_recipes"
     }
   }
 }
