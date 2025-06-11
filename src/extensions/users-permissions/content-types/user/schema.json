@@ -82,6 +82,9 @@
       "relation": "manyToMany",
       "target": "api::local-hero.local-hero",
       "inversedBy": "users"
+    },
+    "user_meta": {
+      "type": "json"
     }
   }
 }
