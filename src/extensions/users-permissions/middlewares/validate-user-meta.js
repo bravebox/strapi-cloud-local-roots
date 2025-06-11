@@ -1,10 +1,11 @@
 'use strict';
 
+// Direct require approach - TypeScript issues are suppressed
+// @ts-ignore
 const Ajv = require('ajv');
+// @ts-ignore
+const ajv = new (Ajv.default || Ajv)({ allErrors: true });
 const userMetaSchema = require('../content-types/user/user-meta.schema');
-
-// Create a validator
-const ajv = new Ajv({ allErrors: true });
 const validateUserMeta = ajv.compile(userMetaSchema);
 
 // Create middleware to validate user_meta
