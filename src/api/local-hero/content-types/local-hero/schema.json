@@ -55,6 +55,12 @@
     "plus": {
       "type": "boolean",
       "default": false
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "favorite_local_heroes"
     }
   }
 }

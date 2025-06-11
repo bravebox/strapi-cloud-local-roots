@@ -112,6 +112,17 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.health"
+    },
+    "cooking_alt": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cooking-alternative"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "favorite_ingredients"
     }
   }
 }

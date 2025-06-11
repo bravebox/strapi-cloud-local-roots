@@ -546,6 +546,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
+    cooking_alt: Schema.Attribute.Component<'shared.cooking-alternative', true>;
     cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -599,6 +600,10 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -681,6 +686,10 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
     website_url: Schema.Attribute.String;
   };
 }
@@ -920,6 +929,7 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
 export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
   collectionName: 'recipes';
   info: {
+    description: '';
     displayName: 'Recipes';
     pluralName: 'recipes';
     singularName: 'recipe';
@@ -933,14 +943,33 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    body: Schema.Attribute.Blocks;
+    body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    ingredients: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::ingredient.ingredient'
+    >;
+    instructions: Schema.Attribute.Component<
+      'shared.cooking-instructions',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.Unique &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -950,6 +979,10 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1460,7 +1493,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1474,6 +1506,18 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    favorite_ingredients: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::ingredient.ingredient'
+    >;
+    favorite_local_heroes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::local-hero.local-hero'
+    >;
+    favorite_recipes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::recipe.recipe'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

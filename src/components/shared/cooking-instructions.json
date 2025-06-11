@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_cooking_instructions",
+  "info": {
+    "displayName": "CookingInstructions",
+    "icon": "clock"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "blocks"
+    }
+  }
+}

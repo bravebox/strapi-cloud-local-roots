@@ -25,15 +25,37 @@ export interface SharedCooking extends Struct.ComponentSchema {
     icon: 'clock';
   };
   attributes: {
-    alternative_method: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
     info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
-    method: Schema.Attribute.Enumeration<
-      ['Cook', 'Grill', 'Oven', 'Blanching', 'Microwave', 'Raw', 'Other']
-    > &
+    method: Schema.Attribute.Enumeration<['Cook', 'Bake/Grill', 'Oven']> &
       Schema.Attribute.Required;
-    temperature: Schema.Attribute.String;
     value: Schema.Attribute.String;
+  };
+}
+
+export interface SharedCookingAlternative extends Struct.ComponentSchema {
+  collectionName: 'components_shared_cooking_alternatives';
+  info: {
+    description: '';
+    displayName: 'CookingAlternative';
+    icon: 'cloud';
+  };
+  attributes: {
+    info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
+    method: Schema.Attribute.Enumeration<['Blanching', 'Microwave', 'Raw']> &
+      Schema.Attribute.Required;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface SharedCookingInstructions extends Struct.ComponentSchema {
+  collectionName: 'components_shared_cooking_instructions';
+  info: {
+    displayName: 'CookingInstructions';
+    icon: 'clock';
+  };
+  attributes: {
+    body: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -168,6 +190,8 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'shared.address': SharedAddress;
       'shared.cooking': SharedCooking;
+      'shared.cooking-alternative': SharedCookingAlternative;
+      'shared.cooking-instructions': SharedCookingInstructions;
       'shared.health': SharedHealth;
       'shared.intolerances': SharedIntolerances;
       'shared.media': SharedMedia;

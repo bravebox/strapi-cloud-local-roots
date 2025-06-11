@@ -4,7 +4,8 @@
   "info": {
     "singularName": "recipe",
     "pluralName": "recipes",
-    "displayName": "Recipes"
+    "displayName": "Recipes",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,10 +23,37 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "body": {
-      "type": "blocks"
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "instructions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cooking-instructions",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ingredients": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ingredient.ingredient"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "favorite_recipes"
     }
   }
 }
