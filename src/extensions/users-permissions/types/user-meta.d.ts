@@ -5,6 +5,9 @@
 export interface UserMeta {
   app: {
     locale: string;
+    skipOnboarding: boolean;
+    lastLogin: string;
+    lastUpdate: string;
   };
   favorites: {
     ingredients: string[];

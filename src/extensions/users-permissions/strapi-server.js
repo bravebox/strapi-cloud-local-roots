@@ -11,8 +11,21 @@ function validateUserMeta(userMeta) {
   if (!userMeta.app || typeof userMeta.app !== 'object') {
     throw new Error('user_meta.app must be an object');
   }
+
   if (typeof userMeta.app.locale !== 'string') {
     throw new Error('user_meta.app.locale must be a string');
+  }
+
+  if (typeof userMeta.app.skipOnboarding !== 'boolean') {
+    throw new Error('user_meta.app.skipOnboarding must be a boolean');
+  }
+
+  if (typeof userMeta.app.lastLogin !== 'string') {
+    throw new Error('user_meta.app.lastLogin must be a string');
+  }
+
+  if (typeof userMeta.app.lastUpdate !== 'string') {
+    throw new Error('user_meta.app.lastUpdate must be a string');
   }
 
   // Check favorites field

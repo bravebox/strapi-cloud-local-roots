@@ -67,6 +67,10 @@
     },
     "user_meta": {
       "type": "json"
+    },
+    "skipOnboarding": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

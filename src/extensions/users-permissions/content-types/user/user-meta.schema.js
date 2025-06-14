@@ -7,9 +7,12 @@ const userMetaSchema = {
   properties: {
     app: {
       type: 'object',
-      required: ['locale'],
+      required: ['locale', 'skipOnboarding', 'lastLogin', 'lastUpdate'],
       properties: {
-        locale: { type: 'string' }
+        locale: { type: 'string' },
+        skipOnboarding: { type: 'boolean' },
+        lastLogin: { type: 'string' },
+        lastUpdate: { type: 'string' }
       }
     },
     favorites: {
