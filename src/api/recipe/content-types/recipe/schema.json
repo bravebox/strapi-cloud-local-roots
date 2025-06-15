@@ -43,11 +43,6 @@
           "localized": true
         }
       }
-    },
-    "ingredients": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::ingredient.ingredient"
     }
   }
 }

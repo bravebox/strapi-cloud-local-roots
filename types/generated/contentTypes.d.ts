@@ -732,9 +732,7 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
-    region: Schema.Attribute.Relation<'oneToOne', 'api::region.region'>;
     type: Schema.Attribute.Enumeration<
       [
         'other',
@@ -846,10 +844,6 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
           info: true;
         }
       >;
-    locations: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::location.location'
-    >;
     membership_ended: Schema.Attribute.Date &
       Schema.Attribute.Private &
       Schema.Attribute.SetPluginOptions<{
@@ -944,10 +938,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    ingredients: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::ingredient.ingredient'
-    >;
     instructions: Schema.Attribute.Component<
       'shared.cooking-instructions',
       true
@@ -1007,6 +997,7 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
     type: Schema.Attribute.Enumeration<
       [
         'Other',
+        'Federal state',
         'Province',
         'District',
         'County',
@@ -1512,8 +1503,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    skipOnboarding: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

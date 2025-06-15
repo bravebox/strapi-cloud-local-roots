@@ -96,17 +96,6 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.address"
-    },
-    "partners": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::partner.partner",
-      "mappedBy": "locations"
-    },
-    "region": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::region.region"
     }
   }
 }

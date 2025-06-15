@@ -25,6 +25,7 @@
       "type": "enumeration",
       "enum": [
         "Other",
+        "Federal state",
         "Province",
         "District",
         "County",
