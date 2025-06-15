@@ -16,6 +16,17 @@
     }
   },
   "attributes": {
+    "main_ingredient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ingredient.ingredient"
+    },
+    "local_heroes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::local-hero.local-hero",
+      "mappedBy": "recipes"
+    },
     "title": {
       "type": "string",
       "unique": true,

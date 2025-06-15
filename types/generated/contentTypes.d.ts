@@ -678,6 +678,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
+    recipes: Schema.Attribute.Relation<'manyToMany', 'api::recipe.recipe'>;
     reserve_href: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -732,7 +733,9 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
     type: Schema.Attribute.Enumeration<
       [
         'other',
@@ -844,6 +847,10 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
           info: true;
         }
       >;
+    locations: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::location.location'
+    >;
     membership_ended: Schema.Attribute.Date &
       Schema.Attribute.Private &
       Schema.Attribute.SetPluginOptions<{
@@ -947,8 +954,16 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    local_heroes: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::local-hero.local-hero'
+    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
+    main_ingredient: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::ingredient.ingredient'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -992,6 +1007,7 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
           info: true;
         }
       >;
+    locations: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     type: Schema.Attribute.Enumeration<

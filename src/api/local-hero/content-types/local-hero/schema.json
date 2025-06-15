@@ -11,6 +11,12 @@
     "draftAndPublish": false
   },
   "attributes": {
+    "recipes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::recipe.recipe",
+      "inversedBy": "local_heroes"      
+    },
     "name": {
       "type": "string",
       "unique": true,
@@ -32,7 +38,11 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::partner.partner",
-      "mappedBy": "local_heroes"
+      "mappedBy": "local_heroes",
+      "inputSize": {
+        "default": 4,
+        "isResizable": true
+      }
     },
     "website_url": {
       "type": "string",
@@ -54,7 +64,7 @@
     },
     "plus": {
       "type": "boolean",
-      "default": false
+      "default": false 
     }
   }
 }

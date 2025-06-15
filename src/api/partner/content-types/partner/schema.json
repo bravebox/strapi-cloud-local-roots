@@ -31,6 +31,12 @@
       "target": "api::local-hero.local-hero",
       "inversedBy": "partners"
     },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location",
+      "inversedBy": "partners"
+    },
     "body": {
       "type": "blocks",
       "pluginOptions": {
