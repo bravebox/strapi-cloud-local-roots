@@ -1,6 +1,28 @@
 const { env } = require('@strapi/utils');
 
 module.exports = () => ({
+  upload: {
+    config: {
+      providerOptions: {
+        sizeLimit: 10 * 1024 * 1024, // 10MB in bytes
+      },
+      breakpoints: {
+        large: 1000,
+        medium: 750,
+        small: 500,
+        thumbnail: 100,
+      },
+      // This forces Strapi to create all formats regardless of original size
+      transformations: {
+        size: {
+          large: { width: 1000, height: 1000 },
+          medium: { width: 750, height: 750 },
+          small: { width: 500, height: 500 },
+          thumbnail: { width: 100, height: 100 }
+        },
+      },
+    },
+  },
 
   graphql: {
     config: {
