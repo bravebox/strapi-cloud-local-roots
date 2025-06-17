@@ -10,6 +10,7 @@
   "options": {
     "draftAndPublish": false
   },
+  "pluginOptions": {},
   "attributes": {
     "locations": {
       "type": "relation",
@@ -22,10 +23,10 @@
     },
     "location": {
       "type": "customField",
+      "customField": "plugin::strapi-location-picker.location-picker",
       "options": {
         "info": true
-      },
-      "customField": "plugin::strapi-location-picker.location-picker"
+      }
     },
     "type": {
       "type": "enumeration",
@@ -46,6 +47,19 @@
     },
     "website_url": {
       "type": "string"
+    },
+    "local_heroes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::local-hero.local-hero",
+      "mappedBy": "region"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

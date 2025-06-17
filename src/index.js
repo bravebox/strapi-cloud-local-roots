@@ -76,7 +76,13 @@ module.exports = {
           seasonalIngredients: {
             resolve: async (parent, args, ctx) => {
               const { month } = args;
-              const allIngredients = await strapi.entityService.findMany('api::ingredient.ingredient');
+              // const allIngredients = await strapi.entityService.findMany('api::ingredient.ingredient');
+
+              const allIngredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
+                fields: ['season', 'title', 'description', 'id'],
+                populate: ['cover'],
+              });
+
               return allIngredients.filter(
                 (ingredient) => ingredient.season && ingredient.season[month] === 'high'
               );

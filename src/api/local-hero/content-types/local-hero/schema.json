@@ -10,39 +10,36 @@
   "options": {
     "draftAndPublish": false
   },
+  "pluginOptions": {},
   "attributes": {
     "recipes": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::recipe.recipe",
-      "inversedBy": "local_heroes"      
+      "inversedBy": "local_heroes"
     },
     "name": {
       "type": "string",
-      "unique": true,
-      "required": true
+      "required": true,
+      "unique": true
+    },
+    "body": {
+      "type": "blocks"
     },
     "cover": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
-        "images",
-        "files"
+        "images"
       ]
     },
     "description": {
       "type": "string"
     },
-    "partners": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::partner.partner",
-      "mappedBy": "local_heroes",
-      "inputSize": {
-        "default": 4,
-        "isResizable": true
-      }
+    "plus": {
+      "type": "boolean",
+      "default": false
     },
     "website_url": {
       "type": "string",
@@ -52,19 +49,24 @@
       "type": "string",
       "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
     },
-    "body": {
-      "type": "blocks"
-    },
     "location": {
       "type": "customField",
+      "customField": "plugin::strapi-location-picker.location-picker",
       "options": {
         "info": true
-      },
-      "customField": "plugin::strapi-location-picker.location-picker"
+      }
     },
-    "plus": {
-      "type": "boolean",
-      "default": false 
+    "partners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::partner.partner",
+      "mappedBy": "local_heroes"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::region.region",
+      "inversedBy": "local_heroes"
     }
   }
 }

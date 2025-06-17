@@ -39,6 +39,12 @@
     },
     "type": {
       "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
       "enum": [
         "other",
         "restaurant",
@@ -81,13 +87,7 @@
         "chocolate shop",
         "food warehouse",
         "food distribution center"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
+      ]
     },
     "body": {
       "type": "blocks",
@@ -99,15 +99,27 @@
     },
     "location": {
       "type": "customField",
+      "customField": "plugin::strapi-location-picker.location-picker",
       "options": {
         "info": true
-      },
-      "customField": "plugin::strapi-location-picker.location-picker"
+      }
     },
     "address": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.address"
+      "component": "shared.address",
+      "repeatable": false
+    },
+    "cover": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

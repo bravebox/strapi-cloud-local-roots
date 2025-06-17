@@ -18,12 +18,12 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true,
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "required": true
     },
     "local_heroes": {
       "type": "relation",
@@ -47,12 +47,12 @@
     },
     "website_href": {
       "type": "string",
-      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
     },
     "contact_name": {
       "type": "string",
@@ -64,6 +64,12 @@
     },
     "type": {
       "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true,
       "enum": [
         "person",
         "group",
@@ -82,23 +88,17 @@
         "religious organization",
         "international organization",
         "media"
-      ],
-      "required": true,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      ]
     },
     "membership_started": {
       "type": "date",
-      "required": true,
       "private": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "membership_ended": {
       "type": "date",
@@ -111,29 +111,53 @@
     },
     "reserve_href": {
       "type": "string",
-      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
     },
     "address": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.address",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "component": "shared.address",
+      "repeatable": false
     },
     "location": {
       "type": "customField",
+      "customField": "plugin::strapi-location-picker.location-picker",
       "options": {
         "info": true
+      }
+    },
+    "cover": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
       },
-      "customField": "plugin::strapi-location-picker.location-picker"
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "logo": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

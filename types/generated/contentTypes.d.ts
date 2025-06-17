@@ -654,7 +654,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
   };
   attributes: {
     body: Schema.Attribute.Blocks;
-    cover: Schema.Attribute.Media<'images' | 'files'>;
+    cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -679,6 +679,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     recipes: Schema.Attribute.Relation<'manyToMany', 'api::recipe.recipe'>;
+    region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
     reserve_href: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -706,6 +707,12 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
   attributes: {
     address: Schema.Attribute.Component<'shared.address', false>;
     body: Schema.Attribute.Blocks &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    cover: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -828,6 +835,12 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
+    cover: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -851,6 +864,12 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::location.location'
     >;
+    logo: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     membership_ended: Schema.Attribute.Date &
       Schema.Attribute.Private &
       Schema.Attribute.SetPluginOptions<{
@@ -942,6 +961,12 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    cover: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -965,6 +990,12 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
       'api::ingredient.ingredient'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Decimal &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -991,9 +1022,14 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    local_heroes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::local-hero.local-hero'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

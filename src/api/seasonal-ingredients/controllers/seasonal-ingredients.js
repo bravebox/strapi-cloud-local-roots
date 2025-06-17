@@ -9,6 +9,7 @@ module.exports = {
 
     const ingredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
       fields: ['season', 'title', 'description', 'id'],
+      populate: ['cover'],
     });
 
     // Filter ingredients where season[month] === 'high'
