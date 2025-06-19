@@ -22,12 +22,6 @@
       "target": "api::partner.partner",
       "mappedBy": "locations"
     },
-    "region": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::region.region",
-      "inversedBy": "locations"
-    },
     "name": {
       "type": "string",
       "pluginOptions": {

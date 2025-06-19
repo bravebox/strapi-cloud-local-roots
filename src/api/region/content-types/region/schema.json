@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "locations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::location.location",
-      "mappedBy": "region"
-    },
     "name": {
       "type": "string"
     },
@@ -48,18 +42,22 @@
     "website_url": {
       "type": "string"
     },
-    "local_heroes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::local-hero.local-hero",
-      "mappedBy": "region"
-    },
     "cover": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "images"
       ]
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::location.location"
+    },
+    "local_heroes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::local-hero.local-hero"
     }
   }
 }

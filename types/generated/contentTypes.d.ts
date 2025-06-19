@@ -684,8 +684,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
-    recipes: Schema.Attribute.Relation<'manyToMany', 'api::recipe.recipe'>;
-    region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
+    recipes: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
     reserve_href: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -748,7 +747,6 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
       }>;
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
     publishedAt: Schema.Attribute.DateTime;
-    region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
     type: Schema.Attribute.Enumeration<
       [
         'other',
@@ -970,7 +968,7 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     cover: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     createdAt: Schema.Attribute.DateTime;
@@ -985,10 +983,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    local_heroes: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::local-hero.local-hero'
-    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
     main_ingredient: Schema.Attribute.Relation<
@@ -1037,7 +1031,7 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     rating: Schema.Attribute.Decimal &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     title: Schema.Attribute.String &

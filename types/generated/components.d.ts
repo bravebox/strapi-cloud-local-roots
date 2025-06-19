@@ -87,7 +87,7 @@ export interface SharedCookingInstructions extends Struct.ComponentSchema {
   attributes: {
     body: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<'images'>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

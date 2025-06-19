@@ -12,12 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "recipes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::recipe.recipe",
-      "inversedBy": "local_heroes"
-    },
     "name": {
       "type": "string",
       "required": true,
@@ -62,11 +56,10 @@
       "target": "api::partner.partner",
       "mappedBy": "local_heroes"
     },
-    "region": {
+    "recipes": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::region.region",
-      "inversedBy": "local_heroes"
+      "relation": "oneToMany",
+      "target": "api::recipe.recipe"
     }
   }
 }
