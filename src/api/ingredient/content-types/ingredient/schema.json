@@ -4,7 +4,7 @@
   "info": {
     "singularName": "ingredient",
     "pluralName": "ingredients",
-    "displayName": "Ingredients",
+    "displayName": "Products",
     "description": ""
   },
   "options": {
@@ -42,33 +42,33 @@
     },
     "storage": {
       "type": "component",
-      "repeatable": true,
-      "component": "shared.storage",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "component": "shared.storage",
+      "repeatable": true
     },
     "nutrients": {
       "type": "component",
-      "repeatable": true,
-      "component": "shared.nutrient"
+      "component": "shared.nutrient",
+      "repeatable": true
     },
     "cooking": {
       "type": "component",
-      "repeatable": true,
-      "component": "shared.cooking",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "component": "shared.cooking",
+      "repeatable": true
     },
     "carousel": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.slider"
+      "component": "shared.slider",
+      "repeatable": false
     },
     "cover": {
       "type": "media",
@@ -100,23 +100,33 @@
     },
     "intolerances": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.intolerances",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "component": "shared.intolerances",
+      "repeatable": false
     },
     "health": {
       "type": "component",
-      "repeatable": false,
-      "component": "shared.health"
+      "component": "shared.health",
+      "repeatable": false
     },
     "cooking_alt": {
       "type": "component",
-      "repeatable": true,
-      "component": "shared.cooking-alternative"
+      "component": "shared.cooking-alternative",
+      "repeatable": true
+    },
+    "components": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "shared.components",
+      "repeatable": false
     }
   }
 }

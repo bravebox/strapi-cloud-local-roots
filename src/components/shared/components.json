@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_components",
+  "info": {
+    "displayName": "Components",
+    "icon": "paintBrush"
+  },
+  "options": {},
+  "attributes": {
+    "Iron": {
+      "type": "boolean",
+      "default": false
+    },
+    "Zinc": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}
