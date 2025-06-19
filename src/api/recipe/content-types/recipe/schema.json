@@ -42,6 +42,69 @@
         }
       }
     },
+    "preparation_time": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "preperation_total_time": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "preparation_method": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "enum": [
+        "Cook",
+        "Bake/Grill",
+        "Oven"
+      ]
+    },
+    "preparation_method_time": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "preperation_temperature": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "preperation_ingredients": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "instructions": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.cooking-instructions",
+      "repeatable": true
+    },
     "cover": {
       "type": "media",
       "pluginOptions": {
@@ -53,16 +116,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "instructions": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.cooking-instructions",
-      "repeatable": true
     },
     "main_ingredient": {
       "type": "relation",

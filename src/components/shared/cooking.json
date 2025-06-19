@@ -9,12 +9,12 @@
   "attributes": {
     "method": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Cook",
         "Bake/Grill",
         "Oven"
-      ],
-      "required": true
+      ]
     },
     "value": {
       "type": "string"
