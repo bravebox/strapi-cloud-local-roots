@@ -540,6 +540,12 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
         };
       }>;
     carousel: Schema.Attribute.Component<'shared.slider', false>;
+    component_list: Schema.Attribute.Component<'shared.components', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     cooking: Schema.Attribute.Component<'shared.cooking', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

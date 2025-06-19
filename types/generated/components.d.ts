@@ -17,6 +17,37 @@ export interface SharedAddress extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedComponents extends Struct.ComponentSchema {
+  collectionName: 'components_shared_components';
+  info: {
+    displayName: 'Components';
+    icon: 'seed';
+  };
+  attributes: {
+    name: Schema.Attribute.Enumeration<
+      [
+        'Vitamin C',
+        'Vitamin A',
+        'Beta-Carotene',
+        'Folic Acid',
+        'Potassium',
+        'Calcium Magnesium',
+        'Iron',
+        'Dietary Fiber',
+        'Vitamin K',
+        'Vitamin E',
+        'Vitamin B6',
+        'Zinc',
+        'Phosphorus',
+        'Copper',
+        'Manganese',
+        'Selenium',
+        'Omega-3 Fatty Acids (ALA)',
+      ]
+    >;
+  };
+}
+
 export interface SharedCooking extends Struct.ComponentSchema {
   collectionName: 'components_shared_cookings';
   info: {
@@ -190,6 +221,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.address': SharedAddress;
+      'shared.components': SharedComponents;
       'shared.cooking': SharedCooking;
       'shared.cooking-alternative': SharedCookingAlternative;
       'shared.cooking-instructions': SharedCookingInstructions;
