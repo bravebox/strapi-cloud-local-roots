@@ -17,18 +17,6 @@ export interface SharedAddress extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedComponents extends Struct.ComponentSchema {
-  collectionName: 'components_shared_components';
-  info: {
-    displayName: 'Components';
-    icon: 'paintBrush';
-  };
-  attributes: {
-    Iron: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    Zinc: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-  };
-}
-
 export interface SharedCooking extends Struct.ComponentSchema {
   collectionName: 'components_shared_cookings';
   info: {
@@ -202,7 +190,6 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.address': SharedAddress;
-      'shared.components': SharedComponents;
       'shared.cooking': SharedCooking;
       'shared.cooking-alternative': SharedCookingAlternative;
       'shared.cooking-instructions': SharedCookingInstructions;

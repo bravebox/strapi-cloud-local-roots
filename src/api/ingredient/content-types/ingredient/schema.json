@@ -117,16 +117,6 @@
       "type": "component",
       "component": "shared.cooking-alternative",
       "repeatable": true
-    },
-    "components": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "component": "shared.components",
-      "repeatable": false
     }
   }
 }
