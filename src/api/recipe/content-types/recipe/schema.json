@@ -78,14 +78,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "rating": {
-      "type": "float",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
     }
   }
 }

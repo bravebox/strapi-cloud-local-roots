@@ -4,7 +4,7 @@ export interface SharedAddress extends Struct.ComponentSchema {
   collectionName: 'components_shared_addresses';
   info: {
     description: '';
-    displayName: 'address';
+    displayName: 'Address';
     icon: 'pinMap';
   };
   attributes: {
@@ -163,25 +163,6 @@ export interface SharedQuote extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedRating extends Struct.ComponentSchema {
-  collectionName: 'components_shared_ratings';
-  info: {
-    displayName: 'Rating';
-    icon: 'star';
-  };
-  attributes: {
-    avarage_score: Schema.Attribute.Decimal &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 5;
-          min: 0;
-        },
-        number
-      >;
-    recipe_rating: Schema.Attribute.Relation<'oneToOne', 'api::recipe.recipe'>;
-  };
-}
-
 export interface SharedRecipeDetails extends Struct.ComponentSchema {
   collectionName: 'components_shared_recipe_details';
   info: {
@@ -266,7 +247,6 @@ declare module '@strapi/strapi' {
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
       'shared.quote': SharedQuote;
-      'shared.rating': SharedRating;
       'shared.recipe-details': SharedRecipeDetails;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;

@@ -1,13 +1,16 @@
 {
   "collectionName": "components_shared_addresses",
   "info": {
-    "displayName": "address",
+    "displayName": "Address",
     "icon": "pinMap",
     "description": ""
   },
   "options": {},
   "attributes": {
     "address_0": {
+      "type": "string"
+    },
+    "address_1": {
       "type": "string"
     },
     "postal_code": {
@@ -18,13 +21,10 @@
     },
     "country": {
       "type": "enumeration",
+      "default": "Germany",
       "enum": [
         "Germany"
-      ],
-      "default": "Germany"
-    },
-    "address_1": {
-      "type": "string"
+      ]
     }
   }
 }
