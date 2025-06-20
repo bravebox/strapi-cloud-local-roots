@@ -101,6 +101,13 @@ module.exports = {
     }
     
     // Duplicate checking was removed as requested
+    const count = await strapi.db.query('api::user-feedback.user-feedback').count({
+      where: { user: userId, recipe: recipeId },
+    });
+
+    if (count > 0) {
+      throw new Error('Duplicate feedback not allowed');
+    }
   },
 
   // Before update hook - enforces validation
