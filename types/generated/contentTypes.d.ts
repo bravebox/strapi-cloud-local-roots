@@ -804,6 +804,31 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMetaMeta extends Struct.SingleTypeSchema {
+  collectionName: 'metas';
+  info: {
+    displayName: 'Meta';
+    pluralName: 'metas';
+    singularName: 'meta';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::meta.meta'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    recipe_ratings: Schema.Attribute.Component<'shared.rating', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   collectionName: 'partners';
   info: {
@@ -1624,6 +1649,7 @@ declare module '@strapi/strapi' {
       'api::intolerance.intolerance': ApiIntoleranceIntolerance;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::location.location': ApiLocationLocation;
+      'api::meta.meta': ApiMetaMeta;
       'api::partner.partner': ApiPartnerPartner;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::region.region': ApiRegionRegion;
