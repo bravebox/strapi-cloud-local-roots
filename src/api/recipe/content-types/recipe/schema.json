@@ -78,6 +78,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "local_hero": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::local-hero.local-hero",
+      "inversedBy": "recipes"
     }
   }
 }

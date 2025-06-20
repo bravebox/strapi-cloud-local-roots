@@ -59,7 +59,8 @@
     "recipes": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::recipe.recipe"
+      "target": "api::recipe.recipe",
+      "mappedBy": "local_hero"
     }
   }
 }

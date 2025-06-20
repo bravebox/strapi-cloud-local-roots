@@ -983,6 +983,10 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    local_hero: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::local-hero.local-hero'
+    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
     main_ingredient: Schema.Attribute.Relation<
