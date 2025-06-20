@@ -182,6 +182,23 @@ export interface SharedRating extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedRecipeDetails extends Struct.ComponentSchema {
+  collectionName: 'components_shared_recipe_details';
+  info: {
+    displayName: 'Recipe details';
+    icon: 'crown';
+  };
+  attributes: {
+    cooking_method: Schema.Attribute.Enumeration<
+      ['Cook', 'Bake/Grill', 'Oven']
+    >;
+    cooking_time: Schema.Attribute.String;
+    oven_temperature: Schema.Attribute.String;
+    preparation_time: Schema.Attribute.String & Schema.Attribute.Required;
+    total_time: Schema.Attribute.String;
+  };
+}
+
 export interface SharedRichText extends Struct.ComponentSchema {
   collectionName: 'components_shared_rich_texts';
   info: {
@@ -250,6 +267,7 @@ declare module '@strapi/strapi' {
       'shared.nutrient': SharedNutrient;
       'shared.quote': SharedQuote;
       'shared.rating': SharedRating;
+      'shared.recipe-details': SharedRecipeDetails;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;

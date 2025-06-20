@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_shared_recipe_details",
+  "info": {
+    "displayName": "Recipe details",
+    "icon": "crown"
+  },
+  "options": {},
+  "attributes": {
+    "preparation_time": {
+      "type": "string",
+      "required": true
+    },
+    "total_time": {
+      "type": "string",
+      "required": false
+    },
+    "cooking_time": {
+      "type": "string",
+      "required": false
+    },
+    "cooking_method": {
+      "type": "enumeration",
+      "required": false,
+      "enum": [
+        "Cook",
+        "Bake/Grill",
+        "Oven"
+      ]
+    },
+    "oven_temperature": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

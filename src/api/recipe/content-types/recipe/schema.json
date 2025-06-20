@@ -34,60 +34,22 @@
         }
       }
     },
-    "rating": {
-      "type": "decimal",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
+    "main_ingredient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ingredient.ingredient"
     },
-    "preparation_time": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "preperation_total_time": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "preparation_method": {
-      "type": "enumeration",
+    "recipe_details": {
+      "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       },
-      "enum": [
-        "Cook",
-        "Bake/Grill",
-        "Oven"
-      ]
+      "component": "shared.recipe-details",
+      "repeatable": false
     },
-    "preparation_method_time": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "preperation_temperature": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
-    },
-    "preperation_ingredients": {
+    "preparation_ingredients": {
       "type": "blocks",
       "pluginOptions": {
         "i18n": {
@@ -117,10 +79,13 @@
         "images"
       ]
     },
-    "main_ingredient": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::ingredient.ingredient"
+    "rating": {
+      "type": "float",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
