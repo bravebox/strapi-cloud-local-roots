@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_feedbacks",
+  "info": {
+    "singularName": "user-feedback",
+    "pluralName": "user-feedbacks",
+    "displayName": "Recipe reviews"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+   "score": {
+      "type": "decimal",
+      "required": true
+    },
+    "recipe": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::recipe.recipe"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

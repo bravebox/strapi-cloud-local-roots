@@ -1075,6 +1075,40 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiUserFeedbackUserFeedback
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_feedbacks';
+  info: {
+    displayName: 'Recipe reviews';
+    pluralName: 'user-feedbacks';
+    singularName: 'user-feedback';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-feedback.user-feedback'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    recipe: Schema.Attribute.Relation<'manyToOne', 'api::recipe.recipe'>;
+    score: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1595,6 +1629,7 @@ declare module '@strapi/strapi' {
       'api::partner.partner': ApiPartnerPartner;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::region.region': ApiRegionRegion;
+      'api::user-feedback.user-feedback': ApiUserFeedbackUserFeedback;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
