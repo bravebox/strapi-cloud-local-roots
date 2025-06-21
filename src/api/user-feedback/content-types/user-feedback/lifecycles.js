@@ -240,91 +240,91 @@ module.exports = {
   },
 
   // After update hook - updates recipe statistics
-  async afterUpdate(event) {
-    const { result } = event;
-    const { data } = event.params;
+  // async afterUpdate(event) {
+  //   const { result } = event;
+  //   const { data } = event.params;
     
-    // Use existing recipe ID if it's not being changed, otherwise get from data
-    let recipeId;
-    if (data.recipe) {
-      recipeId = extractRelationId(data.recipe);
-    } else if (result.recipe) {
-      // If we're not changing the recipe, use the one from the result
-      recipeId = result.recipe?.id || 
-        (typeof result.recipe === 'string' || typeof result.recipe === 'number' ? result.recipe : null);
-    }
+  //   // Use existing recipe ID if it's not being changed, otherwise get from data
+  //   let recipeId;
+  //   if (data.recipe) {
+  //     recipeId = extractRelationId(data.recipe);
+  //   } else if (result.recipe) {
+  //     // If we're not changing the recipe, use the one from the result
+  //     recipeId = result.recipe?.id || 
+  //       (typeof result.recipe === 'string' || typeof result.recipe === 'number' ? result.recipe : null);
+  //   }
     
-    // Make sure we have a primitive value
-    if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
-      recipeId = recipeId.id || recipeId.documentId;
-      console.log(`afterUpdate: extracted primitive ID ${recipeId} from object`);
-    } else {
-      console.log(`afterUpdate: using primitive recipeId: ${util.inspect(recipeId)}`);
-    }
+  //   // Make sure we have a primitive value
+  //   if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
+  //     recipeId = recipeId.id || recipeId.documentId;
+  //     console.log(`afterUpdate: extracted primitive ID ${recipeId} from object`);
+  //   } else {
+  //     console.log(`afterUpdate: using primitive recipeId: ${util.inspect(recipeId)}`);
+  //   }
     
-    // Update recipe statistics with a slight delay to ensure transaction completion
-    if (recipeId) {
-      try {
-        // Small delay to make sure the transaction is complete
-        setTimeout(async () => {
-          try {
-            console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
-            await updateRecipeRatingStats(strapi, recipeId);
-          } catch (delayedError) {
-            console.error(`Error in delayed afterUpdate: ${delayedError.message}`);
-          }
-        }, 100); // 100ms delay
-      } catch (error) {
-        console.error(`Error in afterUpdate hook: ${error.message}`);
-      }
-    }
-  },
+  //   // Update recipe statistics with a slight delay to ensure transaction completion
+  //   if (recipeId) {
+  //     try {
+  //       // Small delay to make sure the transaction is complete
+  //       setTimeout(async () => {
+  //         try {
+  //           console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
+  //           await updateRecipeRatingStats(strapi, recipeId);
+  //         } catch (delayedError) {
+  //           console.error(`Error in delayed afterUpdate: ${delayedError.message}`);
+  //         }
+  //       }, 100); // 100ms delay
+  //     } catch (error) {
+  //       console.error(`Error in afterUpdate hook: ${error.message}`);
+  //     }
+  //   }
+  // },
   
   // After delete hook - updates recipe statistics
-  async afterDelete(event) {
-    const { result } = event;
+  // async afterDelete(event) {
+  //   const { result } = event;
     
-    // For delete, we only have the result to work with
-    // Try different approaches to get the recipe ID
-    let recipeId = null;
+  //   // For delete, we only have the result to work with
+  //   // Try different approaches to get the recipe ID
+  //   let recipeId = null;
     
-    // Log entire result object for debugging
-    console.log(`afterDelete result: ${util.inspect(result, { depth: 3 })}`);
+  //   // Log entire result object for debugging
+  //   console.log(`afterDelete result: ${util.inspect(result, { depth: 3 })}`);
     
-    // Check if result.recipe exists in any format
-    if (result.recipe) {
-      if (typeof result.recipe === 'object' && result.recipe !== null) {
-        recipeId = result.recipe.id || result.recipe.documentId;
-      } else if (typeof result.recipe === 'string' || typeof result.recipe === 'number') {
-        recipeId = result.recipe;
-      }
-    }
+  //   // Check if result.recipe exists in any format
+  //   if (result.recipe) {
+  //     if (typeof result.recipe === 'object' && result.recipe !== null) {
+  //       recipeId = result.recipe.id || result.recipe.documentId;
+  //     } else if (typeof result.recipe === 'string' || typeof result.recipe === 'number') {
+  //       recipeId = result.recipe;
+  //     }
+  //   }
     
-    // Make sure we have a primitive value
-    if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
-      recipeId = recipeId.id || recipeId.documentId;
-      console.log(`afterDelete: extracted primitive ID ${recipeId} from object`);
-    } else {
-      console.log(`afterDelete: using primitive recipeId: ${util.inspect(recipeId)}`);
-    }
+  //   // Make sure we have a primitive value
+  //   if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
+  //     recipeId = recipeId.id || recipeId.documentId;
+  //     console.log(`afterDelete: extracted primitive ID ${recipeId} from object`);
+  //   } else {
+  //     console.log(`afterDelete: using primitive recipeId: ${util.inspect(recipeId)}`);
+  //   }
     
-    // Update recipe statistics with a slight delay to ensure transaction completion
-    if (recipeId) {
-      try {
-        // Small delay to make sure the transaction is complete
-        setTimeout(async () => {
-          try {
-            console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
-            await updateRecipeRatingStats(strapi, recipeId);
-          } catch (delayedError) {
-            console.error(`Error in delayed afterDelete: ${delayedError.message}`);
-          }
-        }, 100); // 100ms delay
-      } catch (error) {
-        console.error(`Error in afterDelete hook: ${error.message}`);
-      }
-    } else {
-      console.log('afterDelete: Could not extract recipe ID from deleted feedback');
-    }
-  }
+  //   // Update recipe statistics with a slight delay to ensure transaction completion
+  //   if (recipeId) {
+  //     try {
+  //       // Small delay to make sure the transaction is complete
+  //       setTimeout(async () => {
+  //         try {
+  //           console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
+  //           await updateRecipeRatingStats(strapi, recipeId);
+  //         } catch (delayedError) {
+  //           console.error(`Error in delayed afterDelete: ${delayedError.message}`);
+  //         }
+  //       }, 100); // 100ms delay
+  //     } catch (error) {
+  //       console.error(`Error in afterDelete hook: ${error.message}`);
+  //     }
+  //   } else {
+  //     console.log('afterDelete: Could not extract recipe ID from deleted feedback');
+  //   }
+  // }
 };
