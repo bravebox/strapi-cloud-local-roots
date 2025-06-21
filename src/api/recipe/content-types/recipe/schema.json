@@ -84,6 +84,22 @@
       "relation": "manyToOne",
       "target": "api::local-hero.local-hero",
       "inversedBy": "recipes"
+    },
+    "average_rating": {
+      "type": "float",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "total_ratings": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

@@ -959,6 +959,12 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    average_rating: Schema.Attribute.Float &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1012,6 +1018,12 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
+        };
+      }>;
+    total_ratings: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
         };
       }>;
     updatedAt: Schema.Attribute.DateTime;
