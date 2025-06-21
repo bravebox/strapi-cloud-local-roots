@@ -57,7 +57,8 @@
     "local_heroes": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::local-hero.local-hero"
+      "target": "api::local-hero.local-hero",
+      "mappedBy": "region"
     }
   }
 }

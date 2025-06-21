@@ -61,6 +61,12 @@
       "relation": "oneToMany",
       "target": "api::recipe.recipe",
       "mappedBy": "local_hero"
+    },
+    "region": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::region.region",
+      "inversedBy": "local_heroes"
     }
   }
 }

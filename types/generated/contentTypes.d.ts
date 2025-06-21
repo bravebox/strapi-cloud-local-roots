@@ -685,6 +685,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     recipes: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
+    region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
     reserve_href: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -964,7 +965,8 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
         i18n: {
           localized: false;
         };
-      }>;
+      }> &
+      Schema.Attribute.DefaultTo<0>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1025,7 +1027,8 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
         i18n: {
           localized: false;
         };
-      }>;
+      }> &
+      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

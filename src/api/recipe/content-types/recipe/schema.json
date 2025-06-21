@@ -91,7 +91,8 @@
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "default": 0
     },
     "total_ratings": {
       "type": "integer",
@@ -99,7 +100,8 @@
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "default": 0
     }
   }
 }
