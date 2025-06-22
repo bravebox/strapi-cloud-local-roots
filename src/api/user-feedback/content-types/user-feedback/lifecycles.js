@@ -44,27 +44,30 @@ const extractRelationId = (relation) => {
 // Helper to update recipe rating statistics
 async function updateRecipeRatingStats(strapi, recipeId) {
   console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+  console.log('what is recipeId', recipeId);
+
+  // First get some recipe details
+  let recipe;
+  try {
+    recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeId, {
+      fields: ['title', 'documentId']
+    });
+  } catch (error) {
+    console.error(`Error fetching recipe details: ${error.message}`);
+    throw error;
+  }
 
   try {
-    // Make sure we have a primitive ID, not an object
-    let recipeIdValue;
-    if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
-      recipeIdValue = recipeId.id || recipeId.documentId;
-      console.log(`Extracted primitive ID ${recipeIdValue} from object for SQL query`);
-    } else {
-      recipeIdValue = recipeId;
-    }
 
-    // Get all feedbacks for this recipe using the join table
-    console.log(`Querying feedbacks for recipe ID: ${recipeIdValue}`);
-    console.log(`Querying feedbacks for recipe document ID: ${recipeId?.documentId}`);
+    console.log('~~ recipe title', recipe.title);
+    console.log('~~ recipe documentId', recipe.documentId);
     
     const result = await strapi.db.connection.raw(`
       SELECT uf.score
       FROM user_feedbacks uf
       JOIN user_feedbacks_recipe_lnk lnk ON uf.id = lnk.user_feedback_id
       WHERE lnk.recipe_id = ?
-    `, [recipeIdValue]);
+    `, [recipeId]);
     
     console.log(`Raw DB result:`, result);
     
@@ -93,7 +96,7 @@ async function updateRecipeRatingStats(strapi, recipeId) {
     }
     
     // Log the number of feedbacks found for this recipe
-    console.log(`Found ${feedbackEntries.length} feedbacks for recipe ${recipeIdValue}`);
+    console.log(`Found ${feedbackEntries.length} feedbacks for recipe ${recipeId}`);
     
     // Calculate new statistics
     const totalRatings = feedbackEntries.length;
@@ -134,52 +137,36 @@ async function updateRecipeRatingStats(strapi, recipeId) {
     }
 
     try {
-      // First, check if a statistic record already exists for this recipe
+      // First, check if a statistic record already exists for this recipe using documentId
       const existingStats = await strapi.entityService.findMany('api::recipe-statistic.recipe-statistic', {
         filters: {
-          recipe_document_id: recipeIdValue
+          recipe_document_id: recipe.documentId
         }
       });
       
-      console.log(`Found ${existingStats?.length || 0} existing statistics for recipe ${recipeIdValue}`);
+      console.log(`Found ${existingStats?.length || 0} existing statistics for recipe documentId ${recipe.documentId}`);
       
+      // Update or create recipe statistic
       if (existingStats && existingStats.length > 0) {
-        // Update existing record
         const statsId = existingStats[0].id;
-        console.log(`Updating existing stats record with ID ${statsId}`);
-        
         await strapi.entityService.update('api::recipe-statistic.recipe-statistic', statsId, {
           data: {
             average_score: averageRating,
             total_ratings: totalRatings
           }
         });
-      } else {
-        // Create new record
-        console.log(`Creating new stats record for recipe ${recipeIdValue}`);
-        
-        // First fetch the recipe to get its title
-        const recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeIdValue, {
-          fields: ['title', 'documentId']
-        });
-        
-        if (!recipe) {
-          throw new Error(`Recipe with ID ${recipeIdValue} not found. Cannot create statistics.`);
-        }
-        
-        console.log(`Got recipe title: ${recipe.title} for ID ${recipeIdValue}`);
-        
+        console.log(`~~~ Updated existing stats record with ID ${statsId}`);
+      } else {        
         // Create the statistics record with the recipe data
         const newStats = await strapi.entityService.create('api::recipe-statistic.recipe-statistic', {
           data: {
             average_score: averageRating,
             total_ratings: totalRatings,
             title: recipe.title,
-            recipe_document_id: recipe.documentId.toString(),
+            recipe_document_id: recipe.documentId,  // Use documentId consistently
           }
         });
-        
-        console.log(`Created new stats record with ID ${newStats.id}`);
+        console.log(`~~~ Created new stats record with ID ${newStats.id}`);
       }
       
       // No need to update recipe relation since we're using a one-way approach now
@@ -188,7 +175,7 @@ async function updateRecipeRatingStats(strapi, recipeId) {
       throw statsError; // Re-throw to be caught by the outer catch block
     }
 
-    console.log(`Done updating recipe rating stats for ${recipeId}`);
+    console.log(`~~~~~~ Done updating recipe rating stats for ${recipeId}`);
     console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
 
   } catch (error) {
