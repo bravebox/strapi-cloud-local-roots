@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipe_statistics",
+  "info": {
+    "singularName": "recipe-statistic",
+    "pluralName": "recipe-statistics",
+    "displayName": "Recipe statistic"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "recipe_document_id": {
+      "type": "string"
+    },
+    "average_score": {
+      "type": "decimal"
+    },
+    "total_ratings": {
+      "type": "integer"
+    }
+  }
+}

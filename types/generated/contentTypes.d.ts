@@ -943,6 +943,38 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRecipeStatisticRecipeStatistic
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'recipe_statistics';
+  info: {
+    displayName: 'Recipe statistic';
+    pluralName: 'recipe-statistics';
+    singularName: 'recipe-statistic';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    average_score: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::recipe-statistic.recipe-statistic'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    recipe_document_id: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    total_ratings: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
   collectionName: 'recipes';
   info: {
@@ -960,13 +992,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    average_rating: Schema.Attribute.Float &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }> &
-      Schema.Attribute.DefaultTo<0>;
     body: Schema.Attribute.Blocks &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1022,13 +1047,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    total_ratings: Schema.Attribute.Integer &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }> &
-      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1646,6 +1664,7 @@ declare module '@strapi/strapi' {
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::location.location': ApiLocationLocation;
       'api::partner.partner': ApiPartnerPartner;
+      'api::recipe-statistic.recipe-statistic': ApiRecipeStatisticRecipeStatistic;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::region.region': ApiRegionRegion;
       'api::user-feedback.user-feedback': ApiUserFeedbackUserFeedback;

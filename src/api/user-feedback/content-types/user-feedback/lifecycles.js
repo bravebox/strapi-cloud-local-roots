@@ -43,6 +43,8 @@ const extractRelationId = (relation) => {
 
 // Helper to update recipe rating statistics
 async function updateRecipeRatingStats(strapi, recipeId) {
+  console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+
   try {
     // Make sure we have a primitive ID, not an object
     let recipeIdValue;
@@ -52,9 +54,10 @@ async function updateRecipeRatingStats(strapi, recipeId) {
     } else {
       recipeIdValue = recipeId;
     }
-    
+
     // Get all feedbacks for this recipe using the join table
     console.log(`Querying feedbacks for recipe ID: ${recipeIdValue}`);
+    console.log(`Querying feedbacks for recipe document ID: ${recipeId?.documentId}`);
     
     const result = await strapi.db.connection.raw(`
       SELECT uf.score
@@ -129,14 +132,65 @@ async function updateRecipeRatingStats(strapi, recipeId) {
       averageRating = sum / totalRatings;
       averageRating = Math.round(averageRating * 10) / 10; // Round to 1 decimal place
     }
-    
-    // Update the recipe - make sure we're using a primitive ID here too
-    await strapi.entityService.update('api::recipe.recipe', recipeIdValue, {
-      data: {
-        average_rating: averageRating,
-        total_ratings: totalRatings
+
+    try {
+      // First, check if a statistic record already exists for this recipe
+      const existingStats = await strapi.entityService.findMany('api::recipe-statistic.recipe-statistic', {
+        filters: {
+          recipe_document_id: recipeIdValue
+        }
+      });
+      
+      console.log(`Found ${existingStats?.length || 0} existing statistics for recipe ${recipeIdValue}`);
+      
+      if (existingStats && existingStats.length > 0) {
+        // Update existing record
+        const statsId = existingStats[0].id;
+        console.log(`Updating existing stats record with ID ${statsId}`);
+        
+        await strapi.entityService.update('api::recipe-statistic.recipe-statistic', statsId, {
+          data: {
+            average_score: averageRating,
+            total_ratings: totalRatings
+          }
+        });
+      } else {
+        // Create new record
+        console.log(`Creating new stats record for recipe ${recipeIdValue}`);
+        
+        // First fetch the recipe to get its title
+        const recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeIdValue, {
+          fields: ['title', 'documentId']
+        });
+        
+        if (!recipe) {
+          throw new Error(`Recipe with ID ${recipeIdValue} not found. Cannot create statistics.`);
+        }
+        
+        console.log(`Got recipe title: ${recipe.title} for ID ${recipeIdValue}`);
+        
+        // Create the statistics record with the recipe data
+        const newStats = await strapi.entityService.create('api::recipe-statistic.recipe-statistic', {
+          data: {
+            average_score: averageRating,
+            total_ratings: totalRatings,
+            title: recipe.title,
+            recipe_document_id: recipe.documentId.toString(),
+          }
+        });
+        
+        console.log(`Created new stats record with ID ${newStats.id}`);
       }
-    });
+      
+      // No need to update recipe relation since we're using a one-way approach now
+    } catch (statsError) {
+      console.error(`Error updating recipe statistics: ${statsError.message}`);
+      throw statsError; // Re-throw to be caught by the outer catch block
+    }
+
+    console.log(`Done updating recipe rating stats for ${recipeId}`);
+    console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+
   } catch (error) {
     console.error(`Error updating recipe rating stats for ${recipeId}:`, error);
   }
@@ -238,93 +292,4 @@ module.exports = {
       }
     }
   },
-
-  // After update hook - updates recipe statistics
-  // async afterUpdate(event) {
-  //   const { result } = event;
-  //   const { data } = event.params;
-    
-  //   // Use existing recipe ID if it's not being changed, otherwise get from data
-  //   let recipeId;
-  //   if (data.recipe) {
-  //     recipeId = extractRelationId(data.recipe);
-  //   } else if (result.recipe) {
-  //     // If we're not changing the recipe, use the one from the result
-  //     recipeId = result.recipe?.id || 
-  //       (typeof result.recipe === 'string' || typeof result.recipe === 'number' ? result.recipe : null);
-  //   }
-    
-  //   // Make sure we have a primitive value
-  //   if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
-  //     recipeId = recipeId.id || recipeId.documentId;
-  //     console.log(`afterUpdate: extracted primitive ID ${recipeId} from object`);
-  //   } else {
-  //     console.log(`afterUpdate: using primitive recipeId: ${util.inspect(recipeId)}`);
-  //   }
-    
-  //   // Update recipe statistics with a slight delay to ensure transaction completion
-  //   if (recipeId) {
-  //     try {
-  //       // Small delay to make sure the transaction is complete
-  //       setTimeout(async () => {
-  //         try {
-  //           console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
-  //           await updateRecipeRatingStats(strapi, recipeId);
-  //         } catch (delayedError) {
-  //           console.error(`Error in delayed afterUpdate: ${delayedError.message}`);
-  //         }
-  //       }, 100); // 100ms delay
-  //     } catch (error) {
-  //       console.error(`Error in afterUpdate hook: ${error.message}`);
-  //     }
-  //   }
-  // },
-  
-  // After delete hook - updates recipe statistics
-  // async afterDelete(event) {
-  //   const { result } = event;
-    
-  //   // For delete, we only have the result to work with
-  //   // Try different approaches to get the recipe ID
-  //   let recipeId = null;
-    
-  //   // Log entire result object for debugging
-  //   console.log(`afterDelete result: ${util.inspect(result, { depth: 3 })}`);
-    
-  //   // Check if result.recipe exists in any format
-  //   if (result.recipe) {
-  //     if (typeof result.recipe === 'object' && result.recipe !== null) {
-  //       recipeId = result.recipe.id || result.recipe.documentId;
-  //     } else if (typeof result.recipe === 'string' || typeof result.recipe === 'number') {
-  //       recipeId = result.recipe;
-  //     }
-  //   }
-    
-  //   // Make sure we have a primitive value
-  //   if (recipeId && typeof recipeId === 'object' && recipeId !== null) {
-  //     recipeId = recipeId.id || recipeId.documentId;
-  //     console.log(`afterDelete: extracted primitive ID ${recipeId} from object`);
-  //   } else {
-  //     console.log(`afterDelete: using primitive recipeId: ${util.inspect(recipeId)}`);
-  //   }
-    
-  //   // Update recipe statistics with a slight delay to ensure transaction completion
-  //   if (recipeId) {
-  //     try {
-  //       // Small delay to make sure the transaction is complete
-  //       setTimeout(async () => {
-  //         try {
-  //           console.log(`Delayed update for recipe ${util.inspect(recipeId)}`);
-  //           await updateRecipeRatingStats(strapi, recipeId);
-  //         } catch (delayedError) {
-  //           console.error(`Error in delayed afterDelete: ${delayedError.message}`);
-  //         }
-  //       }, 100); // 100ms delay
-  //     } catch (error) {
-  //       console.error(`Error in afterDelete hook: ${error.message}`);
-  //     }
-  //   } else {
-  //     console.log('afterDelete: Could not extract recipe ID from deleted feedback');
-  //   }
-  // }
 };
