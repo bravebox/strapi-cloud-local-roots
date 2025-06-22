@@ -46,22 +46,20 @@ async function updateRecipeRatingStats(strapi, recipeId) {
   console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
   console.log('what is recipeId', recipeId);
 
-  // First get some recipe details
-  let recipe;
   try {
-    recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeId, {
+    // First get some recipe details
+    const recipe = await strapi.entityService.findOne('api::recipe.recipe', recipeId, {
       fields: ['title', 'documentId']
     });
-  } catch (error) {
-    console.error(`Error fetching recipe details: ${error.message}`);
-    throw error;
-  }
-
-  try {
+    
+    if (!recipe) {
+      throw new Error(`Recipe with ID ${recipeId} not found. Cannot update statistics.`);
+    }
 
     console.log('~~ recipe title', recipe.title);
     console.log('~~ recipe documentId', recipe.documentId);
     
+    // Get all feedbacks for this recipe using the join table
     const result = await strapi.db.connection.raw(`
       SELECT uf.score
       FROM user_feedbacks uf
@@ -100,27 +98,21 @@ async function updateRecipeRatingStats(strapi, recipeId) {
     
     // Calculate new statistics
     const totalRatings = feedbackEntries.length;
-    
-    // If there are no ratings, set average to 0
     let averageRating = 0;
     
-    // Log the feedback entries for debugging
-    console.log('Feedback entries:', JSON.stringify(feedbackEntries));
-    
     if (totalRatings > 0) {
-      // Extract scores safely regardless of the structure returned by the database
+      // Calculate average rating
       const sum = feedbackEntries.reduce((acc, entry) => {
-        // The score might be a direct property or nested in a score property
-        // It might also be an object with values 
-        let score = 0;
+        // Handle different possible score formats
+        let score = null;
         
-        if (typeof entry === 'number') {
-          // If entry is directly the score number
-          score = entry;
-        } else if (entry && typeof entry === 'object') {
+        if (entry) {
           if (typeof entry.score === 'number') {
-            // Normal case: entry has a score property
+            // Direct number
             score = entry.score;
+          } else if (entry.score && typeof entry.score === 'object' && entry.score !== null) {
+            // Object with value property
+            score = entry.score.value;
           } else if (entry.score && typeof entry.score.value === 'number') {
             // Some database drivers nest it further
             score = entry.score.value;
@@ -136,50 +128,45 @@ async function updateRecipeRatingStats(strapi, recipeId) {
       averageRating = Math.round(averageRating * 10) / 10; // Round to 1 decimal place
     }
 
-    try {
-      // First, check if a statistic record already exists for this recipe using documentId
-      const existingStats = await strapi.entityService.findMany('api::recipe-statistic.recipe-statistic', {
-        filters: {
-          recipe_document_id: recipe.documentId
+    // First, check if a statistic record already exists for this recipe using documentId
+    const existingStats = await strapi.entityService.findMany('api::recipe-statistic.recipe-statistic', {
+      filters: {
+        recipe_document_id: recipe.documentId
+      }
+    });
+    
+    console.log(`Found ${existingStats?.length || 0} existing statistics for recipe documentId ${recipe.documentId}`);
+    
+    // Update or create recipe statistic
+    if (existingStats && existingStats.length > 0) {
+      const statsId = existingStats[0].id;
+      await strapi.entityService.update('api::recipe-statistic.recipe-statistic', statsId, {
+        data: {
+          average_score: averageRating,
+          total_ratings: totalRatings
         }
       });
-      
-      console.log(`Found ${existingStats?.length || 0} existing statistics for recipe documentId ${recipe.documentId}`);
-      
-      // Update or create recipe statistic
-      if (existingStats && existingStats.length > 0) {
-        const statsId = existingStats[0].id;
-        await strapi.entityService.update('api::recipe-statistic.recipe-statistic', statsId, {
-          data: {
-            average_score: averageRating,
-            total_ratings: totalRatings
-          }
-        });
-        console.log(`~~~ Updated existing stats record with ID ${statsId}`);
-      } else {        
-        // Create the statistics record with the recipe data
-        const newStats = await strapi.entityService.create('api::recipe-statistic.recipe-statistic', {
-          data: {
-            average_score: averageRating,
-            total_ratings: totalRatings,
-            title: recipe.title,
-            recipe_document_id: recipe.documentId,  // Use documentId consistently
-          }
-        });
-        console.log(`~~~ Created new stats record with ID ${newStats.id}`);
-      }
-      
-      // No need to update recipe relation since we're using a one-way approach now
-    } catch (statsError) {
-      console.error(`Error updating recipe statistics: ${statsError.message}`);
-      throw statsError; // Re-throw to be caught by the outer catch block
+      console.log(`~~~ Updated existing stats record with ID ${statsId}`);
+    } else {        
+      // Create the statistics record with the recipe data
+      const newStats = await strapi.entityService.create('api::recipe-statistic.recipe-statistic', {
+        data: {
+          average_score: averageRating,
+          total_ratings: totalRatings,
+          title: recipe.title,
+          recipe_document_id: recipe.documentId,  // Use documentId consistently
+        }
+      });
+      console.log(`~~~ Created new stats record with ID ${newStats.id}`);
     }
-
+    
     console.log(`~~~~~~ Done updating recipe rating stats for ${recipeId}`);
     console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
 
   } catch (error) {
     console.error(`Error updating recipe rating stats for ${recipeId}:`, error);
+    // We don't re-throw since this function is called in lifecycle hooks
+    // and we don't want to block the main operation if statistics update fails
   }
 }
 
