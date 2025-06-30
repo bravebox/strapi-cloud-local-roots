@@ -7,10 +7,14 @@
   },
   "options": {},
   "attributes": {
-    "address_0": {
+    "show_venue": {
+      "type": "boolean",
+      "default": true
+    },
+    "venue": {
       "type": "string"
     },
-    "address_1": {
+    "address": {
       "type": "string"
     },
     "postal_code": {

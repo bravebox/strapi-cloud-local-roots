@@ -8,12 +8,13 @@ export interface SharedAddress extends Struct.ComponentSchema {
     icon: 'pinMap';
   };
   attributes: {
-    address_0: Schema.Attribute.String;
-    address_1: Schema.Attribute.String;
+    address: Schema.Attribute.String;
     city: Schema.Attribute.String;
     country: Schema.Attribute.Enumeration<['Germany']> &
       Schema.Attribute.DefaultTo<'Germany'>;
     postal_code: Schema.Attribute.String;
+    show_venue: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    venue: Schema.Attribute.String;
   };
 }
 
@@ -121,6 +122,17 @@ export interface SharedIntolerances extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedList extends Struct.ComponentSchema {
+  collectionName: 'components_shared_lists';
+  info: {
+    displayName: 'List';
+    icon: 'bulletList';
+  };
+  attributes: {
+    list_item: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -148,6 +160,18 @@ export interface SharedNutrient extends Struct.ComponentSchema {
     unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
       Schema.Attribute.Required;
     value: Schema.Attribute.Decimal & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedPhone extends Struct.ComponentSchema {
+  collectionName: 'components_shared_phones';
+  info: {
+    displayName: 'Phone';
+    icon: 'bell';
+  };
+  attributes: {
+    allow_phone: Schema.Attribute.Boolean;
+    phone: Schema.Attribute.String;
   };
 }
 
@@ -244,8 +268,10 @@ declare module '@strapi/strapi' {
       'shared.cooking-instructions': SharedCookingInstructions;
       'shared.health': SharedHealth;
       'shared.intolerances': SharedIntolerances;
+      'shared.list': SharedList;
       'shared.media': SharedMedia;
       'shared.nutrient': SharedNutrient;
+      'shared.phone': SharedPhone;
       'shared.quote': SharedQuote;
       'shared.recipe-details': SharedRecipeDetails;
       'shared.rich-text': SharedRichText;

@@ -659,6 +659,7 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    address: Schema.Attribute.Component<'shared.address', false>;
     body: Schema.Attribute.Blocks;
     cover: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
@@ -682,11 +683,13 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     partners: Schema.Attribute.Relation<'manyToMany', 'api::partner.partner'>;
+    phone: Schema.Attribute.Component<'shared.phone', false>;
     plus: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     recipes: Schema.Attribute.Relation<'oneToMany', 'api::recipe.recipe'>;
     region: Schema.Attribute.Relation<'manyToOne', 'api::region.region'>;
     reserve_href: Schema.Attribute.String;
+    special_notes: Schema.Attribute.Component<'shared.list', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

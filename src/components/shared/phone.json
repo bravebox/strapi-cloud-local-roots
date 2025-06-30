@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_phones",
+  "info": {
+    "displayName": "Phone",
+    "icon": "bell"
+  },
+  "options": {},
+  "attributes": {
+    "phone": {
+      "type": "string"
+    },
+    "allow_phone": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

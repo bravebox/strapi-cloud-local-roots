@@ -43,12 +43,27 @@
       "type": "string",
       "regex": "^https:\\/\\/[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}([\\/\\w .-]*)*\\/?$"
     },
+    "special_notes": {
+      "type": "component",
+      "component": "shared.list",
+      "repeatable": true
+    },
     "location": {
       "type": "customField",
       "customField": "plugin::strapi-location-picker.location-picker",
       "options": {
         "info": true
       }
+    },
+    "address": {
+      "type": "component",
+      "component": "shared.address",
+      "repeatable": false
+    },
+    "phone": {
+      "type": "component",
+      "component": "shared.phone",
+      "repeatable": false
     },
     "partners": {
       "type": "relation",
