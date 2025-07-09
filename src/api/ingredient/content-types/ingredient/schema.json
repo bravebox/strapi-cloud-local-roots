@@ -127,6 +127,22 @@
       },
       "component": "shared.components",
       "repeatable": true
+    },
+    "color_theme": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "default": "Sandige Strände ",
+      "enum": [
+        "Sandige Strände ",
+        "Lavendel Genuss",
+        "Rosige Morgendämmerung",
+        "Frische Minze",
+        "Sanfter Himmel"
+      ]
     }
   }
 }

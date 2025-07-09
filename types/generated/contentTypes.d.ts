@@ -540,6 +540,21 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
         };
       }>;
     carousel: Schema.Attribute.Component<'shared.slider', false>;
+    color_theme: Schema.Attribute.Enumeration<
+      [
+        'Sandige Str\u00E4nde ',
+        'Lavendel Genuss',
+        'Rosige Morgend\u00E4mmerung',
+        'Frische Minze',
+        'Sanfter Himmel',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<'Sandige Str\u00E4nde '>;
     component_list: Schema.Attribute.Component<'shared.components', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
