@@ -542,7 +542,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
     carousel: Schema.Attribute.Component<'shared.slider', false>;
     color_theme: Schema.Attribute.Enumeration<
       [
-        'Sandige Str\u00E4nde ',
+        'Sandige Str\u00E4nde',
         'Lavendel Genuss',
         'Rosige Morgend\u00E4mmerung',
         'Frische Minze',
@@ -554,7 +554,7 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }> &
-      Schema.Attribute.DefaultTo<'Sandige Str\u00E4nde '>;
+      Schema.Attribute.DefaultTo<'Sandige Str\u00E4nde'>;
     component_list: Schema.Attribute.Component<'shared.components', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -961,6 +961,50 @@ export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiRecipeIngredientRecipeIngredient
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'recipe_ingredients';
+  info: {
+    displayName: 'Recipe ingredient';
+    pluralName: 'recipe-ingredients';
+    singularName: 'recipe-ingredient';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::recipe-ingredient.recipe-ingredient'
+    >;
+    plural: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    single: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiRecipeStatisticRecipeStatistic
   extends Struct.CollectionTypeSchema {
   collectionName: 'recipe_statistics';
@@ -1052,6 +1096,15 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
       }>;
     publishedAt: Schema.Attribute.DateTime;
     recipe_details: Schema.Attribute.Component<'shared.recipe-details', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    recipe_ingredients: Schema.Attribute.Component<
+      'shared.recipe-ingredient',
+      true
+    > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -1682,6 +1735,7 @@ declare module '@strapi/strapi' {
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::location.location': ApiLocationLocation;
       'api::partner.partner': ApiPartnerPartner;
+      'api::recipe-ingredient.recipe-ingredient': ApiRecipeIngredientRecipeIngredient;
       'api::recipe-statistic.recipe-statistic': ApiRecipeStatisticRecipeStatistic;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::region.region': ApiRegionRegion;
