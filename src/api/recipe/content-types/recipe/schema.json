@@ -57,6 +57,16 @@
         }
       }
     },
+    "recipe_ingredients": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "shared.recipe-ingredient",
+      "repeatable": true
+    },
     "instructions": {
       "type": "component",
       "pluginOptions": {

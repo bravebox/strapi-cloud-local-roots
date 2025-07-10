@@ -8,7 +8,7 @@
   "attributes": {
     "preparation_time": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "total_time": {
       "type": "string",

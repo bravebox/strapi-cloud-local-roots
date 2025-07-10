@@ -199,8 +199,97 @@ export interface SharedRecipeDetails extends Struct.ComponentSchema {
     >;
     cooking_time: Schema.Attribute.String;
     oven_temperature: Schema.Attribute.String;
-    preparation_time: Schema.Attribute.String & Schema.Attribute.Required;
+    preparation_time: Schema.Attribute.String;
     total_time: Schema.Attribute.String;
+  };
+}
+
+export interface SharedRecipeIngredient extends Struct.ComponentSchema {
+  collectionName: 'components_shared_recipe_ingredients';
+  info: {
+    displayName: 'Recipe ingredient';
+    icon: 'crown';
+  };
+  attributes: {
+    descriptive_action: Schema.Attribute.Enumeration<
+      [
+        'Not applicable',
+        'Minced',
+        'Chopped',
+        'Peeled',
+        'Peeled and chopped',
+        'Peeled and sliced',
+        'Sliced',
+        'Diced',
+        'Cubed',
+        'Grated',
+        'Shredded',
+        'Crushed',
+        'Halved',
+        'Quartered',
+        'Zested',
+        'Seeded',
+        'Cored',
+        'Trimmed',
+        'Rinsed',
+        'Washed',
+        'Drained',
+        'Beaten',
+        'Whisked',
+        'Mashed',
+        'Julienned',
+        'For garnish',
+        'Garnish',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'Not applicable'>;
+    recipe_ingredients: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::recipe-ingredient.recipe-ingredient'
+    >;
+    size: Schema.Attribute.Enumeration<
+      ['Not applicable', 'Small', 'Medium', 'Large']
+    > &
+      Schema.Attribute.DefaultTo<'Not applicable'>;
+    title_no_used: Schema.Attribute.String;
+    unit: Schema.Attribute.Enumeration<
+      [
+        'Not applicable',
+        'Teaspoon',
+        'Tablespoon',
+        'Cup',
+        'Milliliter',
+        'Liter',
+        'Fluid ounce',
+        'Pint',
+        'Quart',
+        'Gallon',
+        'Drop',
+        'Dash',
+        'Pinch',
+        'Gram',
+        'Kilogram',
+        'Milligram',
+        'Ounce',
+        'Pound',
+        'Piece',
+        'Slice',
+        'Clove',
+        'Leaf',
+        'Stick',
+        'Can',
+        'Jar',
+        'Bottle',
+        'Packet',
+        'Bunch',
+        'Head',
+        'Fillet',
+        'Sheet',
+        'Sprig',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'Not applicable'>;
+    value: Schema.Attribute.Decimal;
   };
 }
 
@@ -252,7 +341,9 @@ export interface SharedStorage extends Struct.ComponentSchema {
   };
   attributes: {
     info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
-    type: Schema.Attribute.Enumeration<['Room', 'Refrigerator', 'Freezer']>;
+    type: Schema.Attribute.Enumeration<
+      ['Room', 'Refrigerator', 'Freezer', 'Not']
+    >;
     unit: Schema.Attribute.Enumeration<['Days', 'Weeks', 'Months', 'Years']>;
     value: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
   };
@@ -274,6 +365,7 @@ declare module '@strapi/strapi' {
       'shared.phone': SharedPhone;
       'shared.quote': SharedQuote;
       'shared.recipe-details': SharedRecipeDetails;
+      'shared.recipe-ingredient': SharedRecipeIngredient;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;

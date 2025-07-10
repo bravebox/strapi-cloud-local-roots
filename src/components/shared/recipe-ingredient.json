@@ -1,0 +1,105 @@
+{
+  "collectionName": "components_shared_recipe_ingredients",
+  "info": {
+    "displayName": "Recipe ingredient",
+    "icon": "crown"
+  },
+  "options": {},
+  "attributes": {
+    "title_no_used": {
+      "type": "string"
+    },
+    "recipe_ingredients": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::recipe-ingredient.recipe-ingredient"
+    },
+    "size": {
+      "type": "enumeration",
+      "default": "Not applicable",
+      "enum": [
+        "Not applicable",
+        "Small",
+        "Medium",
+        "Large"
+      ]
+    },
+    "unit": {
+      "type": "enumeration",
+      "required": false,
+      "default": "Not applicable",
+      "enum": [
+        "Not applicable",
+        "Teaspoon",
+        "Tablespoon",
+        "Cup",
+        "Milliliter",
+        "Liter",
+        "Fluid ounce",
+        "Pint",
+        "Quart",
+        "Gallon",
+        "Drop",
+        "Dash",
+        "Pinch",
+        "Gram",
+        "Kilogram",
+        "Milligram",
+        "Ounce",
+        "Pound",
+        "Piece",
+        "Slice",
+        "Clove",
+        "Leaf",
+        "Stick",
+        "Can",
+        "Jar",
+        "Bottle",
+        "Packet",
+        "Bunch",
+        "Head",
+        "Fillet",
+        "Sheet",
+        "Sprig"
+      ]
+    },
+    "value": {
+      "type": "decimal",
+      "required": false
+    },
+    "descriptive_action": {
+      "type": "enumeration",
+      "default": "Not applicable",
+      "enum": [
+        "Not applicable",
+        "Minced",
+        "Chopped",
+        "Peeled",
+        "Peeled and chopped",
+        "Peeled and sliced",
+        "Sliced",
+        "Diced",
+        "Cubed",
+        "Grated",
+        "Shredded",
+        "Crushed",
+        "Halved",
+        "Quartered",
+        "Zested",
+        "Seeded",
+        "Cored",
+        "Trimmed",
+        "Rinsed",
+        "Washed",
+        "Drained",
+        "Beaten",
+        "Whisked",
+        "Mashed",
+        "Julienned",
+        "For garnish",
+        "Garnish"
+      ]
+    }
+  },
+  "config": {}
+}

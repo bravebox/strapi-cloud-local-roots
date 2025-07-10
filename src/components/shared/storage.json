@@ -7,22 +7,18 @@
   },
   "options": {},
   "attributes": {
-    "value": {
-      "type": "integer",
-      "default": 1
-    },
     "type": {
       "type": "enumeration",
       "enum": [
         "Room",
         "Refrigerator",
-        "Freezer"
+        "Freezer",
+        "Not"
       ]
     },
-    "info_box": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::info-box.info-box"
+    "value": {
+      "type": "integer",
+      "default": 1
     },
     "unit": {
       "type": "enumeration",
@@ -32,6 +28,11 @@
         "Months",
         "Years"
       ]
+    },
+    "info_box": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::info-box.info-box"
     }
   }
 }
