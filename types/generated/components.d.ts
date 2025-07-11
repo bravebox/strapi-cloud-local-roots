@@ -243,8 +243,8 @@ export interface SharedRecipeIngredient extends Struct.ComponentSchema {
       ]
     > &
       Schema.Attribute.DefaultTo<'Not applicable'>;
-    recipe_ingredients: Schema.Attribute.Relation<
-      'oneToMany',
+    recipe_ingredient: Schema.Attribute.Relation<
+      'oneToOne',
       'api::recipe-ingredient.recipe-ingredient'
     >;
     size: Schema.Attribute.Enumeration<

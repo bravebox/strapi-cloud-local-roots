@@ -49,14 +49,6 @@
       "component": "shared.recipe-details",
       "repeatable": false
     },
-    "preparation_ingredients": {
-      "type": "blocks",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "recipe_ingredients": {
       "type": "component",
       "pluginOptions": {

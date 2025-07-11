@@ -9,9 +9,9 @@
     "title_no_used": {
       "type": "string"
     },
-    "recipe_ingredients": {
+    "recipe_ingredient": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::recipe-ingredient.recipe-ingredient"
     },
     "size": {

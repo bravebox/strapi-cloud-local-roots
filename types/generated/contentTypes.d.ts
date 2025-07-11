@@ -994,6 +994,7 @@ export interface ApiRecipeIngredientRecipeIngredient
       }>;
     publishedAt: Schema.Attribute.DateTime;
     single: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1088,12 +1089,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::ingredient.ingredient'
     >;
-    preparation_ingredients: Schema.Attribute.Blocks &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     publishedAt: Schema.Attribute.DateTime;
     recipe_details: Schema.Attribute.Component<'shared.recipe-details', false> &
       Schema.Attribute.SetPluginOptions<{
