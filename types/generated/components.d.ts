@@ -32,7 +32,8 @@ export interface SharedComponents extends Struct.ComponentSchema {
         'Beta-Carotene',
         'Folic Acid',
         'Potassium',
-        'Calcium Magnesium',
+        'Calcium ',
+        'Magnesium',
         'Iron',
         'Dietary Fiber',
         'Vitamin K',
@@ -154,7 +155,7 @@ export interface SharedNutrient extends Struct.ComponentSchema {
   attributes: {
     percentage: Schema.Attribute.Decimal;
     type: Schema.Attribute.Enumeration<
-      ['Energy', 'Protein', 'Fat', 'Sugar', 'Salt']
+      ['Energy', 'Protein', 'Fat', 'Sugar', 'Salt', 'Fibre']
     > &
       Schema.Attribute.Required;
     unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
@@ -197,10 +198,22 @@ export interface SharedRecipeDetails extends Struct.ComponentSchema {
     cooking_method: Schema.Attribute.Enumeration<
       ['Cook', 'Bake/Grill', 'Oven']
     >;
-    cooking_time: Schema.Attribute.String;
-    oven_temperature: Schema.Attribute.String;
-    preparation_time: Schema.Attribute.String;
-    total_time: Schema.Attribute.String;
+    cooking_time: Schema.Attribute.Integer;
+    cooking_time_temperature: Schema.Attribute.Integer;
+    cooking_time_unit: Schema.Attribute.Enumeration<
+      ['seconds', 'minutes', 'hours', 'days']
+    > &
+      Schema.Attribute.DefaultTo<'minutes'>;
+    preperation_time: Schema.Attribute.Integer;
+    preperation_time_unit: Schema.Attribute.Enumeration<
+      ['seconds', 'minutes', 'hours', 'days']
+    > &
+      Schema.Attribute.DefaultTo<'minutes'>;
+    total_time: Schema.Attribute.Integer;
+    total_time_unit: Schema.Attribute.Enumeration<
+      ['seconds', 'minutes', 'hours', 'days']
+    > &
+      Schema.Attribute.DefaultTo<'minutes'>;
   };
 }
 
