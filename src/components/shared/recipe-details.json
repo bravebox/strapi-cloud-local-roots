@@ -6,17 +6,34 @@
   },
   "options": {},
   "attributes": {
-    "preparation_time": {
-      "type": "string",
-      "required": false
+    "preperation_time": {
+      "type": "integer"
     },
-    "total_time": {
-      "type": "string",
-      "required": false
+    "preperation_time_unit": {
+      "type": "enumeration",
+      "default": "minutes",
+      "enum": [
+        "seconds",
+        "minutes",
+        "hours",
+        "days"
+      ]
     },
     "cooking_time": {
-      "type": "string",
-      "required": false
+      "type": "integer"
+    },
+    "total_time": {
+      "type": "integer"
+    },
+    "total_time_unit": {
+      "type": "enumeration",
+      "default": "minutes",
+      "enum": [
+        "seconds",
+        "minutes",
+        "hours",
+        "days"
+      ]
     },
     "cooking_method": {
       "type": "enumeration",
@@ -27,8 +44,18 @@
         "Oven"
       ]
     },
-    "oven_temperature": {
-      "type": "string"
+    "cooking_time_unit": {
+      "type": "enumeration",
+      "default": "minutes",
+      "enum": [
+        "seconds",
+        "minutes",
+        "hours",
+        "days"
+      ]
+    },
+    "cooking_time_temperature": {
+      "type": "integer"
     }
   },
   "config": {}
