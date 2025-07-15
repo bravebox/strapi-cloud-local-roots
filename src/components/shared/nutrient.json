@@ -9,14 +9,15 @@
   "attributes": {
     "type": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Energy",
         "Protein",
         "Fat",
         "Sugar",
-        "Salt"
-      ],
-      "required": true
+        "Salt",
+        "Fibre"
+      ]
     },
     "value": {
       "type": "decimal",
@@ -24,11 +25,11 @@
     },
     "unit": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Kcal",
         "Gram"
-      ],
-      "required": true
+      ]
     },
     "percentage": {
       "type": "decimal",
