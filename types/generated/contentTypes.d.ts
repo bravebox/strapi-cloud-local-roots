@@ -823,6 +823,53 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMonthSelectorMonthSelector
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'month_selectors';
+  info: {
+    displayName: 'Month selector';
+    pluralName: 'month-selectors';
+    singularName: 'month-selector';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    color_hex: Schema.Attribute.String & Schema.Attribute.DefaultTo<'#BFC8BA'>;
+    cover: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::month-selector.month-selector'
+    > &
+      Schema.Attribute.Private;
+    Month: Schema.Attribute.Enumeration<
+      [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+      ]
+    > &
+      Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPartnerPartner extends Struct.CollectionTypeSchema {
   collectionName: 'partners';
   info: {
@@ -1729,6 +1776,7 @@ declare module '@strapi/strapi' {
       'api::intolerance.intolerance': ApiIntoleranceIntolerance;
       'api::local-hero.local-hero': ApiLocalHeroLocalHero;
       'api::location.location': ApiLocationLocation;
+      'api::month-selector.month-selector': ApiMonthSelectorMonthSelector;
       'api::partner.partner': ApiPartnerPartner;
       'api::recipe-ingredient.recipe-ingredient': ApiRecipeIngredientRecipeIngredient;
       'api::recipe-statistic.recipe-statistic': ApiRecipeStatisticRecipeStatistic;

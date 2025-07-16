@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "month_selectors",
+  "info": {
+    "singularName": "month-selector",
+    "pluralName": "month-selectors",
+    "displayName": "Month selector"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Month": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
+    },
+    "color_hex": {
+      "type": "string",
+      "default": "#BFC8BA",
+      "required": false,
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
