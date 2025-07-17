@@ -16,6 +16,15 @@
         "Oven"
       ]
     },
+    "unit": {
+      "type": "enumeration",
+      "default": "Minutes",
+      "enum": [
+        "Seconds",
+        "Minutes",
+        "Hours"
+      ]
+    },
     "value": {
       "type": "string"
     },

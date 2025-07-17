@@ -61,6 +61,8 @@ export interface SharedCooking extends Struct.ComponentSchema {
     info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
     method: Schema.Attribute.Enumeration<['Cook', 'Bake/Grill', 'Oven']> &
       Schema.Attribute.Required;
+    unit: Schema.Attribute.Enumeration<['Seconds', 'Minutes', 'Hours']> &
+      Schema.Attribute.DefaultTo<'Minutes'>;
     value: Schema.Attribute.String;
   };
 }
@@ -76,6 +78,8 @@ export interface SharedCookingAlternative extends Struct.ComponentSchema {
     info_box: Schema.Attribute.Relation<'oneToOne', 'api::info-box.info-box'>;
     method: Schema.Attribute.Enumeration<['Blanching', 'Microwave', 'Raw']> &
       Schema.Attribute.Required;
+    unit: Schema.Attribute.Enumeration<['Seconds', 'Minutes', 'Hours']> &
+      Schema.Attribute.DefaultTo<'Minutes'>;
     value: Schema.Attribute.String;
   };
 }

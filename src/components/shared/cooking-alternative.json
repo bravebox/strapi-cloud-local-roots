@@ -9,12 +9,21 @@
   "attributes": {
     "method": {
       "type": "enumeration",
+      "required": true,
       "enum": [
         "Blanching",
         "Microwave",
         "Raw"
-      ],
-      "required": true
+      ]
+    },
+    "unit": {
+      "type": "enumeration",
+      "default": "Minutes",
+      "enum": [
+        "Seconds",
+        "Minutes",
+        "Hours"
+      ]
     },
     "value": {
       "type": "string"
