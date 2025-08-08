@@ -54,7 +54,13 @@ module.exports = {
         extend type Query {
           now: SimpleResponse!
           ingredientSeasonalTotals: SeasonalTotals!
-          seasonalIngredients(month: String!): [Ingredient]!
+          seasonalIngredients(
+            month: String!
+            locale: String
+            limit: Int
+            offset: Int
+            sort: String
+          ): [Ingredient]!
         }
       `,
 
@@ -75,17 +81,29 @@ module.exports = {
           },
           seasonalIngredients: {
             resolve: async (parent, args, ctx) => {
-              const { month } = args;
-              // const allIngredients = await strapi.entityService.findMany('api::ingredient.ingredient');
+              const { month, locale = 'en', limit = 25, offset = 0, sort = 'title:asc' } = args;
+              
+              if (!month) {
+                throw new Error('Missing required "month" parameter');
+              }
 
-              const allIngredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
+              const ingredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
                 fields: ['season', 'title', 'description', 'id'],
                 populate: ['cover'],
+                locale,
+                limit: parseInt(limit),
+                start: parseInt(offset),
+                sort: [sort],
               });
 
-              return allIngredients.filter(
-                (ingredient) => ingredient.season && ingredient.season[month] === 'high'
-              );
+              // Filter ingredients where season[month] === 'high'
+              const filtered = ingredients.filter(ingredient => {
+                const season = ingredient.season || {};
+                return season[month]?.toLowerCase() === 'high';
+              });
+
+              // Return direct array of ingredients (no data/attributes wrapper for GraphQL)
+              return filtered;
             },
           },
         },
