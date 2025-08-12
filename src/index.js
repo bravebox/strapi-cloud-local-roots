@@ -53,7 +53,7 @@ module.exports = {
 
         extend type Query {
           now: SimpleResponse!
-          ingredientSeasonalTotals: SeasonalTotals!
+          ingredientSeasonalTotals(locale: String): SeasonalTotals!
           seasonalIngredients(
             month: String!
             locale: String
@@ -75,8 +75,38 @@ module.exports = {
           },
           ingredientSeasonalTotals: {
             resolve: async (parent, args, ctx) => {
-              // You can call your controller or put logic here
-              return await strapi.controllers['api::totals.totals'].getTotals(ctx);
+              const { locale = 'en' } = args;
+              
+              const ingredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
+                fields: ['season'],
+                locale,
+              });
+
+              const seasonalTotals = {
+                january: 0,
+                february: 0,
+                march: 0,
+                april: 0,
+                may: 0,
+                june: 0,
+                july: 0,
+                august: 0,
+                september: 0,
+                october: 0,
+                november: 0,
+                december: 0,
+              };
+
+              ingredients.forEach(ingredient => {
+                const season = ingredient.season || {};
+                Object.entries(season).forEach(([month, value]) => {
+                  if (value?.toLowerCase() === 'high' && seasonalTotals.hasOwnProperty(month)) {
+                    seasonalTotals[month]++;
+                  }
+                });
+              });
+
+              return seasonalTotals;
             },
           },
           seasonalIngredients: {

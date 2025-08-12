@@ -1,10 +1,12 @@
 'use strict';
 
 module.exports = {
-  getTotals: async () => {
+  getTotals: async (ctx) => {
+    const { locale } = ctx.query;
 
     const ingredients = await strapi.entityService.findMany('api::ingredient.ingredient', {
       fields: ['season'],
+      locale: locale || 'en', // Default to 'en' if no locale specified
     });
 
     const seasonalTotals = {
