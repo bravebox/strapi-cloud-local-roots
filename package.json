@@ -7,10 +7,9 @@
     "build": "strapi build",
     "deploy": "strapi deploy",
     "develop": "strapi develop",
-    "trigger:build": "yarn build && git commit --allow-empty -m 'Trigger rebuild' && git push",
-    "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "preinstall": "npx only-allow npm"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "^5.23.0",
@@ -37,5 +36,6 @@
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
-  }
+  },
+  "packageManager": "npm@10.0.0"
 }
