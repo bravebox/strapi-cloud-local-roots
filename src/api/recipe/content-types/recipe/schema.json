@@ -34,6 +34,21 @@
         }
       }
     },
+    "main_ingredient": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ingredient.ingredient"
+    },
+    "recipe_details": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "shared.recipe-details",
+      "repeatable": false
+    },
     "recipe_ingredients": {
       "type": "component",
       "pluginOptions": {
@@ -54,11 +69,6 @@
       "component": "shared.cooking-instructions",
       "repeatable": true
     },
-    "main_ingredient": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::ingredient.ingredient"
-    },
     "cover": {
       "type": "media",
       "pluginOptions": {
@@ -76,16 +86,6 @@
       "relation": "manyToOne",
       "target": "api::local-hero.local-hero",
       "inversedBy": "recipes"
-    },
-    "recipe_details": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "component": "shared.recipe-details",
-      "repeatable": false
     }
   }
 }
