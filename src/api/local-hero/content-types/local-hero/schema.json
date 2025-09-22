@@ -48,18 +48,6 @@
       "component": "shared.list",
       "repeatable": true
     },
-    "location": {
-      "type": "customField",
-      "customField": "plugin::strapi-location-picker.location-picker",
-      "options": {
-        "info": true
-      }
-    },
-    "address": {
-      "type": "component",
-      "component": "shared.address",
-      "repeatable": false
-    },
     "phone": {
       "type": "component",
       "component": "shared.phone",
@@ -82,6 +70,58 @@
       "relation": "manyToOne",
       "target": "api::region.region",
       "inversedBy": "local_heroes"
+    },
+    "location_relation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::location.location",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "use_custom_location"
+            },
+            true
+          ]
+        }
+      },
+      "inversedBy": "local_heroes"
+    },
+    "use_custom_location": {
+      "type": "boolean",
+      "default": false
+    },
+    "location": {
+      "type": "customField",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "use_custom_location"
+            },
+            true
+          ]
+        }
+      },
+      "customField": "plugin::strapi-location-picker.location-picker",
+      "options": {
+        "info": true
+      }
+    },
+    "address": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "use_custom_location"
+            },
+            true
+          ]
+        }
+      },
+      "component": "shared.address",
+      "repeatable": false
     }
   }
 }

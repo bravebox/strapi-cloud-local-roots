@@ -694,6 +694,10 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
           info: true;
         }
       >;
+    location_relation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::location.location'
+    >;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -708,6 +712,8 @@ export interface ApiLocalHeroLocalHero extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    use_custom_location: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     website_url: Schema.Attribute.String;
   };
 }
@@ -745,6 +751,10 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    local_heroes: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::local-hero.local-hero'
+    >;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

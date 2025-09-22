@@ -114,6 +114,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "local_heroes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::local-hero.local-hero",
+      "mappedBy": "location_relation"
     }
   }
 }
