@@ -13,7 +13,18 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "name_de": {
+      "type": "string",
+      "required": true
+    },
+    "short_name": {
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "location": {
       "type": "customField",

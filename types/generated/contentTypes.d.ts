@@ -1200,8 +1200,12 @@ export interface ApiRegionRegion extends Struct.CollectionTypeSchema {
         }
       >;
     locations: Schema.Attribute.Relation<'oneToMany', 'api::location.location'>;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    name_de: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    short_name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     type: Schema.Attribute.Enumeration<
       [
         'Other',
