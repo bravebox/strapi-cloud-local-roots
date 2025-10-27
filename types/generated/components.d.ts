@@ -160,7 +160,7 @@ export interface SharedNutrient extends Struct.ComponentSchema {
   attributes: {
     percentage: Schema.Attribute.Decimal;
     type: Schema.Attribute.Enumeration<
-      ['Energy', 'Protein', 'Fat', 'Sugar', 'Salt', 'Fibre', 'Carbohydrates']
+      ['Energy', 'Protein', 'Fat', 'Salt', 'Fibre', 'Carbohydrates']
     > &
       Schema.Attribute.Required;
     unit: Schema.Attribute.Enumeration<['Kcal', 'Gram']> &
