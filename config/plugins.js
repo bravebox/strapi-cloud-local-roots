@@ -1,6 +1,9 @@
 const { env } = require('@strapi/utils');
 
 module.exports = () => ({
+
+
+
   graphql: {
     config: {
       endpoint: "/graphql",
@@ -37,5 +40,10 @@ module.exports = () => ({
   'address-selection': {
     enabled: true
   },
+
+  'strapi-import-export': {
+    enabled: true,
+    config: {},
+  }
 
 });
